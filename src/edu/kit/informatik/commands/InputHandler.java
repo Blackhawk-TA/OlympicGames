@@ -1,6 +1,7 @@
 package edu.kit.informatik.commands;
 
 import edu.kit.informatik.Terminal;
+import edu.kit.informatik.admin.AccountSystem;
 
 public class InputHandler {
 
@@ -8,21 +9,53 @@ public class InputHandler {
      * Handles all console commands
      */
     public static void inputs() {
-        RegexHandler regex = new RegexHandler();
+        RegexHandler regexCmd = new RegexHandler("command"); //TODO adapt
+        RegexHandler regexAddAdmin = new RegexHandler("addAcc");
+        RegexHandler regexLogin = new RegexHandler("login");
         boolean running = true;
+
+        AccountSystem system = new AccountSystem();
 
         while (running) {
             String input = Terminal.readLine();
-            String[] groups = regex.createGroups(input);
-            String arg = groups[1]; //The main command of the argument (such as "reset", "quit")
+            String[] groups = regexCmd.createGroups(input);
+            String[] groupsAdmin = regexAddAdmin.createGroups(input);
+            String[] groupsLogin = regexLogin.createGroups(input);
+            String arg = "";
 
-            if (regex.isValid(input)) {
-                if (arg.matches("quit") && regex.hasParam(groups, 0)) {
+            //Set the regex type depending on input
+            if (groups[1] != null && groupsAdmin[1] == null && groupsLogin[1] == null)
+                arg = groups[1];
+            else if (groups[1] == null && groupsAdmin[1] != null && groupsLogin[1] == null)
+                arg = groupsAdmin[1];
+            else if (groups[1] == null && groupsAdmin[1] == null && groupsLogin[1] != null)
+                arg = groupsLogin[1];
+            else
+                Terminal.printError("unknown command or the input parameters are invalid.");
+
+            if (regexCmd.isValid(input) || regexAddAdmin.isValid(input) || regexLogin.isValid(input)) {
+                if (arg.matches("quit") && regexCmd.hasParam(groups, 0)) {
                     running = false;
                 }
-                else if (arg.matches("reset") && regex.hasParam(groups, 0)) {
+                else if (arg.matches("reset") && regexCmd.hasParam(groups, 0)) {
                     running = false;
                     Terminal.printLine("OK");
+                }
+                else if (arg.matches("add-admin") && regexAddAdmin.hasParam(groupsAdmin, 4)) {
+                    Terminal.printLine(system.addAccount(
+                            regexAddAdmin.getParam(groupsAdmin, 0),
+                            regexAddAdmin.getParam(groupsAdmin, 1),
+                            regexAddAdmin.getParam(groupsAdmin, 2),
+                            regexAddAdmin.getParam(groupsAdmin, 3)
+                        )
+                    );
+                }
+                else if (arg.matches("login-admin") && regexLogin.hasParam(groupsLogin, 2)) {
+                    Terminal.printLine(system.login(
+                            regexLogin.getParam(groupsLogin, 0),
+                            regexLogin.getParam(groupsLogin, 1)
+                        )
+                    );
                 }
                 else {
                     Terminal.printError("unknown command or the input parameters are invalid.");

@@ -9,11 +9,30 @@ public class RegexHandler {
 
     /**
      * Regex Constructor
+     * @param mode This defines which regex pattern should be used
      */
-    RegexHandler() {
-        pattern = Pattern.compile("^([a-z-]+)(\\s)?((\\w+);){0,7}(\\w+)?$");
-        groupMod = 1; //when input is for game init, params start at index 1
-        groupNum = 6;
+    RegexHandler(String mode) {
+        switch (mode) {
+            case "command":
+                pattern = Pattern.compile(
+                        "^([a-z-]+)(\\s)?(\\w+)?;?(\\w+)?;?(\\w+)?;?(\\w+)?;?(\\w+)?;?(\\w+)?;?(\\w+)?;?(\\w+)?$"
+                );
+                groupMod = 2; //when input is for game init, params start at index 1
+                groupNum = 11;
+                break;
+            case "addAcc": //TODO \w should support more special chars
+                pattern = Pattern.compile("^(add-admin)\\s(.[^;][^\\n]+);(.[^;]+);(.[^;]{3,7});(.[^;]{7,11})$");
+                groupMod = 2; //when input is for game init, params start at index 1
+                groupNum = 5;
+                break;
+            case "login":
+                pattern = Pattern.compile("^(login-admin)\\s(.[^;]{3,7});(.[^;]{7,11})$");
+                groupMod = 2; //when input is for game init, params start at index 1
+                groupNum = 3;
+                break;
+            default:
+                break;
+        }
     }
 
     /**
