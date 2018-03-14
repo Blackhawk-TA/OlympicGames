@@ -25,4 +25,52 @@ class SportsVenue {
         this.openingYear = openingYear;
         this.seats = seats;
     }
+
+    /**
+     * Get the id of the sports venue
+     * @return The id of the sports venue
+     */
+    String getId() {
+        return id;
+    }
+
+    /**
+     * Get the country where the sports venue is located
+     * @return The country where the sports venue is located
+     */
+    String getCountry() {
+        return country;
+    }
+
+    /**
+     * Get the location of the sports venue
+     * @return The location of the sports venue
+     */
+    String getLocation() {
+        return location;
+    }
+
+    /**
+     * Get the name of the sports venue
+     * @return The name of the sports venue
+     */
+    String getName() {
+        return name;
+    }
+
+    /**
+     * Get the opening year of the sports venue
+     * @return The opening year of the sports venue
+     */
+    int getOpeningYear() {
+        return openingYear;
+    }
+
+    /**
+     * Get the amount of seats of the sports venue
+     * @return The amount of seats of the sports venue
+     */
+    int getSeats() {
+        return seats;
+    }
 }

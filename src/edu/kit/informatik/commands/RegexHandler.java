@@ -21,7 +21,7 @@ public class RegexHandler {
                 groupNum = 11;
                 break;
             case "addAcc": //TODO \w should support more special chars
-                pattern = Pattern.compile("^(add-admin)\\s(.[^;][^\\n]+);(.[^;]+);(.[^;]{3,7});(.[^;]{7,11})$");
+                pattern = Pattern.compile("^(add-admin)\\s(.[^;]*);(.[^;]*);(.[^;]{3,7});(.[^;]{7,11})$");
                 groupMod = 2; //when input is for game init, params start at index 1
                 groupNum = 6;
                 break;
@@ -50,7 +50,7 @@ public class RegexHandler {
             return false;
 
         for (int i = groupMod; i < groups.length; i++) {
-            if (counter == n && !groups[i].isEmpty())
+            if (counter == n && groups[i] != null && !groups[i].isEmpty())
                 return false;
 
             if (groups[i] != null && !groups[i].isEmpty())

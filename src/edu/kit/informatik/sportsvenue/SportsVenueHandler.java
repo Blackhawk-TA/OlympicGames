@@ -14,11 +14,15 @@ public class SportsVenueHandler {
      * @param name The name of the venue
      * @param openingYear The year when the sports venue first opened
      * @param seats The amount of seat available
-     * @return String containing "OK" if successful
+     * @return String containing "OK" if successful and error message if not
      */
     public String addSportsVenue(String id, String country, String location, String name, int openingYear, int seats) {
-        sportsVenues.add(new SportsVenue(id, country, location, name, openingYear, seats));
-        return "OK";
+        if (getIndex(id) == -1) {
+            sportsVenues.add(new SportsVenue(id, country, location, name, openingYear, seats));
+            return "OK";
+        } else {
+            return "Error, this sports venue already exists.";
+        }
     }
 
     /**
@@ -28,5 +32,20 @@ public class SportsVenueHandler {
      */
     public String listSportVenues(String country) {
         return "";
+    }
+
+
+    /**
+     * Get the index of the item where the requested id is located
+     * @param id The id to search for
+     * @return The id if found, else -1
+     */
+    private int getIndex(String id) {
+        for (int i = 0; i < sportsVenues.size(); i++) {
+            if (sportsVenues.get(i).getId().equals(id)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
