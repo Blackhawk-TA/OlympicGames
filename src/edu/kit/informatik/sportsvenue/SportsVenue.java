@@ -1,4 +1,4 @@
-package edu.kit.informatik.SportsVenue;
+package edu.kit.informatik.sportsvenue;
 
 class SportsVenue {
     private final String id;

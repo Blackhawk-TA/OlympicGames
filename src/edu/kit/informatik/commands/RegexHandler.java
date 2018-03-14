@@ -23,12 +23,12 @@ public class RegexHandler {
             case "addAcc": //TODO \w should support more special chars
                 pattern = Pattern.compile("^(add-admin)\\s(.[^;][^\\n]+);(.[^;]+);(.[^;]{3,7});(.[^;]{7,11})$");
                 groupMod = 2; //when input is for game init, params start at index 1
-                groupNum = 5;
+                groupNum = 6;
                 break;
             case "login":
                 pattern = Pattern.compile("^(login-admin)\\s(.[^;]{3,7});(.[^;]{7,11})$");
                 groupMod = 2; //when input is for game init, params start at index 1
-                groupNum = 3;
+                groupNum = 4;
                 break;
             default:
                 break;

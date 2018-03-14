@@ -26,7 +26,7 @@ public class AccountSystem {
             if (loginSuccess) {
                 return "OK";
             } else {
-                return "Error, wrong user data, account not found";
+                return "Error, wrong user data, account not found.";
             }
         } else {
             return "Error, there is already an admin logged in.";

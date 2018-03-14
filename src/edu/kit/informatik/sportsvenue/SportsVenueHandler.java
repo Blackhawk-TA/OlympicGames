@@ -1,4 +1,4 @@
-package edu.kit.informatik.SportsVenue;
+package edu.kit.informatik.sportsvenue;
 
 import java.util.ArrayList;
 import java.util.List;

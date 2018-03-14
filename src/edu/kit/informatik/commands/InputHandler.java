@@ -21,19 +21,17 @@ public class InputHandler {
             String[] groups = regexCmd.createGroups(input);
             String[] groupsAdmin = regexAddAdmin.createGroups(input);
             String[] groupsLogin = regexLogin.createGroups(input);
-            String arg = "";
+            String arg;
 
             //Set the regex type depending on input
-            if (groups[1] != null && groupsAdmin[1] == null && groupsLogin[1] == null)
-                arg = groups[1];
-            else if (groups[1] == null && groupsAdmin[1] != null && groupsLogin[1] == null)
+            if (groups[1] == null && groupsAdmin[1] != null && groupsLogin[1] == null)
                 arg = groupsAdmin[1];
             else if (groups[1] == null && groupsAdmin[1] == null && groupsLogin[1] != null)
                 arg = groupsLogin[1];
             else
-                Terminal.printError("unknown command or the input parameters are invalid.");
+                arg = groups[1];
 
-            if (regexCmd.isValid(input) || regexAddAdmin.isValid(input) || regexLogin.isValid(input)) {
+            if (arg != null && (regexCmd.isValid(input) || regexAddAdmin.isValid(input) || regexLogin.isValid(input))) {
                 if (arg.matches("quit") && regexCmd.hasParam(groups, 0)) {
                     running = false;
                 }
