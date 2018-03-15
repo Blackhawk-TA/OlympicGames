@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IocHandler {
-    private final List<Ioc> iocs = new ArrayList<>();
+    private final List<Ioc> ioc = new ArrayList<>();
 
     /**
      * Add an ioc for a country
@@ -16,7 +16,7 @@ public class IocHandler {
      */
     public String addIOC(String id, String code, String country, int year) {
         if (getIndex(code) == -1) {
-            iocs.add(new Ioc(id, code, country, year));
+            ioc.add(new Ioc(id, code, country, year));
             return "OK";
         } else {
             return "Error, this athlete already exists.";
@@ -28,12 +28,26 @@ public class IocHandler {
      * @param id The id to search for
      * @return The id if found, else -1
      */
-    private int getIndex(String id) {
-        for (int i = 0; i < iocs.size(); i++) {
-            if (iocs.get(i).getCode().equals(id)) {
+    public int getIndex(String id) {
+        for (int i = 0; i < ioc.size(); i++) {
+            if (ioc.get(i).getCode().equals(id)) {
                 return i;
             }
         }
         return -1;
+    }
+
+    /**
+     * Get the IOC of a country
+     * @param country The country the IOC is searched for
+     * @return The to the country referring IOC
+     */
+    public String toIOC(String country) {
+        for (Ioc item: ioc) {
+            if (item.getCountry().equals(country)) {
+                return item.getCode();
+            }
+        }
+        return "";
     }
 }
