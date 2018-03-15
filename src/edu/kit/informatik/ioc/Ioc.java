@@ -27,4 +27,12 @@ class Ioc {
     String getCode() {
         return code;
     }
+
+    /**
+     * Get the country of a ioc code
+     * @return The country which the ioc code refers to
+     */
+    String getCountry() {
+        return country;
+    }
 }

@@ -1,5 +1,7 @@
 package edu.kit.informatik.sportsvenue;
 
+import edu.kit.informatik.ioc.IocHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +19,13 @@ public class SportsVenueHandler {
      * @return String containing "OK" if successful and error message if not
      */
     public String addSportsVenue(String id, String country, String location, String name, int openingYear, int seats) {
-        if (getIndex(id) == -1) {
+        IocHandler handler = new IocHandler();
+        int iocExists = handler.getIndex(handler.toIOC(country));
+        if (getIndex(id) == -1 && iocExists != -1) {
             sportsVenues.add(new SportsVenue(id, country, location, name, openingYear, seats));
             return "OK";
+        } else if (iocExists == -1) {
+            return "Error, IOC does not exist.";
         } else {
             return "Error, this sports venue already exists.";
         }
@@ -31,6 +37,15 @@ public class SportsVenueHandler {
      * @return A list of sport venues of the requested country
      */
     public String listSportVenues(String country) {
+        List<SportsVenue> sortedList = new ArrayList<>();
+
+        for (SportsVenue item: sportsVenues ) {
+            if (item.getCountry().equals(country)) {
+                sortedList.add(item);
+            }
+        }
+        //Comparator.comparing(SportsVenue::getSeats);
+
         return "";
     }
 

@@ -1,6 +1,7 @@
 package edu.kit.informatik;
 
 import edu.kit.informatik.commands.InputHandler;
+import edu.kit.informatik.sportsvenue.SportsVenueHandler;
 
 public class Main {
     /**
