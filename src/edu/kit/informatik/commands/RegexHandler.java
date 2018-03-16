@@ -16,10 +16,10 @@ class RegexHandler {
             case "command":
                 pattern = Pattern.compile("^([a-z-]+)(\\s)?(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?;?"
                                             + "(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?$"); //80 char max width is fun
-                groupMod = 2; //when input is for game init, params start at index 1
+                groupMod = 3; //when input is for game init, params start at index 1
                 groupNum = 11;
                 break;
-            case "addAcc": //TODO \w should support more special chars
+            case "addAcc":
                 pattern = Pattern.compile("^(add-admin)\\s(.[^;]*);(.[^;]*);(.[^;]{3,7});(.[^;]{7,11})$");
                 groupMod = 2; //when input is for game init, params start at index 1
                 groupNum = 6;
@@ -43,6 +43,7 @@ class RegexHandler {
     boolean hasParam(String[] groups, int n) {
         int counter = 0;
 
+        //If space is wrong return false
         if (n == 0 && groups[2] != null)
             return false;
         else if (n > 0 && groups[2] == null)
@@ -83,10 +84,18 @@ class RegexHandler {
      * @return array of parameters
      */
     String getParam(String[] groups, int index) {
-        if (!groups[index + groupMod].isEmpty())
-            return groups[index + groupMod];
-        else
+        String groupItem = groups[index + groupMod];
+        if (!groupItem.isEmpty()) {
+            //On first param, remove space in front of it if necessary
+            if (index == 0 & groupItem.startsWith(" ")) {
+                System.out.println(groupItem);
+                groupItem = groupItem.substring(1);
+            }
+            return groupItem;
+        }
+        else {
             return "";
+        }
     }
 
     /**

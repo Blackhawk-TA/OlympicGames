@@ -109,7 +109,7 @@ public class InputHandler {
             } else {
                 Terminal.printError("invalid input parameters.");
             }
-        } else if (arg.matches("summary-athletes") && regexCmd.hasParam(groups, 6)) {
+        } else if (arg.matches("summary-athletes") && regexCmd.hasParam(groups, 2)) {
             Terminal.printLine(core.getAthleteHandler().summaryAthletes(
                     regexCmd.getParam(groups, 0),
                     regexCmd.getParam(groups, 1)
