@@ -1,12 +1,10 @@
 package edu.kit.informatik.sports;
 
-import edu.kit.informatik.utils.ListUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class SportHandler {
-    private final List<String> disciplines = new ArrayList<>();
+    private final List<Discipline> disciplines = new ArrayList<>();
 
     /**
      * Adds a discipline and sport if one of them doesn't exist yet
@@ -15,9 +13,8 @@ public class SportHandler {
      * @return String, OK if successful, else error message
      */
     public String addDiscipline(String sport, String discipline) {
-        int disciplineId = ListUtils.getIndexByName(disciplines, discipline);
-        if (disciplineId == -1) {
-            disciplines.add(discipline);
+        if (getIndex(discipline) == -1) {
+            disciplines.add(new Discipline(sport, discipline));
             return "OK";
         } else {
             return "Error, discipline already exists.";
@@ -30,5 +27,19 @@ public class SportHandler {
      */
     public String listSports() {
         return "";
+    }
+
+    /**
+     * Get the index of the item where the requested discipline is located
+     * @param discipline The discipline to search for
+     * @return The discipline if found, else -1
+     */
+    private int getIndex(String discipline) {
+        for (int i = 0; i < disciplines.size(); i++) {
+            if (disciplines.get(i).getDiscipline().equals(discipline)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

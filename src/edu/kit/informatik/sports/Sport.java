@@ -1,7 +1,5 @@
 package edu.kit.informatik.sports;
 
-import edu.kit.informatik.utils.ListUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,7 @@ class Sport {
      */
     Sport(String name) {
         this.name = name;
-        if (ListUtils.getIndexByName(sports, name) == -1) {
+        if (getIndex(name) == -1) {
             sports.add(name);
         }
     }
@@ -34,5 +32,19 @@ class Sport {
      */
     List<String> getSports() {
         return sports;
+    }
+
+    /**
+     * Get the index of the item where the requested sport is located
+     * @param sport The discipline to search for
+     * @return The sport if found, else -1
+     */
+    private int getIndex(String sport) {
+        for (int i = 0; i < sports.size(); i++) {
+            if (sports.get(i).equals(sport)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

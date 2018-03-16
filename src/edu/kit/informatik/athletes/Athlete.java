@@ -7,6 +7,7 @@ class Athlete {
     private final String country;
     private final String sport;
     private final String discipline;
+    private Integer medals;
 
     /**
      * Constructor for athletes
@@ -32,5 +33,52 @@ class Athlete {
      */
     String getId() {
         return id;
+    }
+
+    /**
+     * Get the first name of the athlete
+     * @return The first name
+     */
+    String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Get the last name of the athlete
+     * @return The last name
+     */
+    String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Get the sport the athlete is doing
+     * @return The sport
+     */
+    String getSport() {
+        return sport;
+    }
+
+    /**
+     * Get the discipline the athlete is doing
+     * @return The discipline
+     */
+    String getDiscipline() {
+        return discipline;
+    }
+
+    /**
+     * Get the medals of the athlete
+     * @return The medals the athlete has earned
+     */
+    Integer getMedals() {
+        return medals;
+    }
+
+    /**
+     * Add a medal to the athlete
+     */
+    void addMedal() {
+        medals++;
     }
 }

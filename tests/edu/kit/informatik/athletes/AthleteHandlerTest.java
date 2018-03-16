@@ -29,4 +29,12 @@ public class AthleteHandlerTest {
         assertEquals("Success", "OK", handler.addAthlete(5, "name5", "name5", "POL", "ball", "basketball"));
         assertEquals("Success", ex, handler.addAthlete(5, "name5", "dsa", "RUS", "winter", "basketball"));
     }
+
+    @Test
+    public void summaryAthletes() {
+        handler.addAthlete(4, "name4", "name4", "USA", "winter", "ski");
+        handler.addAthlete(5, "name5", "name5", "RUS", "winter", "ski");
+        handler.addAthlete(6, "name6", "name6", "USA", "winter", "ski");
+        System.out.println(handler.summaryAthletes("winter", "ski"));
+    }
 }

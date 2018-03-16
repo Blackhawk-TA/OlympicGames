@@ -2,7 +2,7 @@ package edu.kit.informatik.commands;
 
 import java.util.regex.*;
 
-public class RegexHandler {
+class RegexHandler {
     private int groupMod; //Group modifier for input parameters
     private int groupNum; //Amount of expected groups in a regex
     private Pattern pattern;

@@ -36,8 +36,9 @@ public class InputHandler {
                     inputsNoLogin(arg, groups, groupsAdmin, groupsLogin);
                 }
             }
-            else
+            else {
                 Terminal.printError("command does not fit pattern.");
+            }
         }
     }
 
@@ -63,8 +64,9 @@ public class InputHandler {
                         regexCmd.getParam(groups, 3),
                         param4,
                         param5));
-            } else
+            } else {
                 Terminal.printError("invalid input parameters.");
+            }
         } else if (arg.matches("list-sports-venue") && regexCmd.hasParam(groups, 0)) {
             Terminal.printLine(core.getVenueHandler().listSportVenues(
                     regexCmd.getParam(groups, 0)
@@ -87,8 +89,9 @@ public class InputHandler {
                         regexCmd.getParam(groups, 2),
                         param3
                 ));
-            } else
+            } else {
                 Terminal.printError("invalid input parameters.");
+            }
         } else if (arg.matches("list-ioc-codes") && regexCmd.hasParam(groups, 0)) {
             Terminal.printLine(core.getIocHandler().listIOC());
         } else if (arg.matches("add-athlete") && regexCmd.hasParam(groups, 6)) {
