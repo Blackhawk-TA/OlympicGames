@@ -14,9 +14,9 @@ public class IocHandler {
      * @param year The year the code has been added
      * @return String containing "OK" if successful and error message if not
      */
-    public String addIOC(String id, String code, String country, int year) {
+    public String addIOC(int id, String code, String country, int year) {
         if (getIndex(code) == -1) {
-            ioc.add(new Ioc(id, code, country, year));
+            ioc.add(new Ioc(id, code, country, year)); //TODO either check for id and country duplicate or generate them
             return "OK";
         } else {
             return "Error, this athlete already exists.";
@@ -24,13 +24,13 @@ public class IocHandler {
     }
 
     /**
-     * Get the index of the item where the requested id is located
-     * @param id The id to search for
-     * @return The id if found, else -1
+     * Get the index of the item where the requested code is located
+     * @param code The code to search for
+     * @return The index of the code if found, else -1
      */
-    public int getIndex(String id) {
+    public int getIndex(String code) {
         for (int i = 0; i < ioc.size(); i++) {
-            if (ioc.get(i).getCode().equals(id)) {
+            if (ioc.get(i).getCode().equals(code)) {
                 return i;
             }
         }

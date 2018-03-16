@@ -1,7 +1,7 @@
 package edu.kit.informatik.ioc;
 
 class Ioc {
-    private final String id;
+    private final int id;
     private final String code;
     private final String country;
     private final int year;
@@ -13,7 +13,7 @@ class Ioc {
      * @param country The country which the code stands for
      * @param year The year the code has been added
      */
-    Ioc(String id, String code, String country, int year) {
+    Ioc(int id, String code, String country, int year) {
         this.id = id;
         this.code = code;
         this.country = country;

@@ -28,7 +28,7 @@ public class SportHandler {
      * Creates a list of all sports and disciplines
      * @return The list of sports and disciplines
      */
-    public String listDisciplines() {
+    public String listSports() {
         return "";
     }
 }

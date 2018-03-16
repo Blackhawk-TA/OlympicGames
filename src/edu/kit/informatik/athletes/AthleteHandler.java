@@ -16,7 +16,7 @@ public class AthleteHandler {
      * @param discipline The discipline the athlete is doing
      * @return String, OK if successful, else error message
      */
-    public String addAthlete(String id, String firstName, String lastName, String country,
+    public String addAthlete(int id, String firstName, String lastName, String country,
                              String sport, String discipline) { //TODO only allow id at patter 0001
         if (getIndex(id) == -1) {
             athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
@@ -31,9 +31,9 @@ public class AthleteHandler {
      * @param id The id to search for
      * @return The id if found, else -1
      */
-    private int getIndex(String id) {
+    private int getIndex(int id) {
         for (int i = 0; i < athletes.size(); i++) {
-            if (athletes.get(i).getId().equals(id)) {
+            if (athletes.get(i).getId() == id) {
                 return i;
             }
         }

@@ -1,12 +1,12 @@
 package edu.kit.informatik.sportsvenue;
 
 class SportsVenue {
-    private final String id;
+    private final Integer id;
     private final String country;
     private final String location;
     private final String name;
     private final int openingYear;
-    private final int seats;
+    private final Integer seats;
 
     /**
      * Constructor for the sports venue
@@ -17,7 +17,7 @@ class SportsVenue {
      * @param openingYear The year when the sports venue first opened
      * @param seats The amount of seat available
      */
-    SportsVenue(String id, String country, String location, String name, int openingYear, int seats) {
+    SportsVenue(Integer id, String country, String location, String name, int openingYear, Integer seats) {
         this.id = id;
         this.country = country;
         this.location = location;
@@ -30,7 +30,7 @@ class SportsVenue {
      * Get the id of the sports venue
      * @return The id of the sports venue
      */
-    String getId() {
+    Integer getId() {
         return id;
     }
 
@@ -70,7 +70,7 @@ class SportsVenue {
      * Get the amount of seats of the sports venue
      * @return The amount of seats of the sports venue
      */
-    int getSeats() {
+    Integer getSeats() {
         return seats;
     }
 }

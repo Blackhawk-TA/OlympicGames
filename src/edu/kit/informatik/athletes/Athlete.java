@@ -1,7 +1,7 @@
 package edu.kit.informatik.athletes;
 
 class Athlete {
-    private final String id;
+    private final int id;
     private final String firstName;
     private final String lastName;
     private final String country;
@@ -17,7 +17,7 @@ class Athlete {
      * @param sport The sport the athlete is doing
      * @param discipline The discipline the athlete is doing
      */
-    Athlete(String id, String firstName, String lastName, String country, String sport, String discipline) {
+    Athlete(int id, String firstName, String lastName, String country, String sport, String discipline) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,7 +26,7 @@ class Athlete {
         this.discipline = discipline;
     }
 
-    String getId() {
+    int getId() {
         return id;
     }
 }
