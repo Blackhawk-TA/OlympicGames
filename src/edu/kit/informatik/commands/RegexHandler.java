@@ -14,8 +14,8 @@ public class RegexHandler {
     RegexHandler(String mode) {
         switch (mode) {
             case "command":
-                pattern = Pattern.compile("^([a-z-]+)(\\s)?(.[^;]+)?;?(.[^;]+)?;?(.[^;]+)?;?(.[^;]+)?;?(.[^;]+)?;?"
-                                            + "(.[^;]+)?;?(.[^;]+)?;?(.[^;]+)?$"); //80 char max width is fun
+                pattern = Pattern.compile("^([a-z-]+)(\\s)?(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?;?"
+                                            + "(.[^;]*)?;?(.[^;]*)?;?(.[^;]*)?$"); //80 char max width is fun
                 groupMod = 2; //when input is for game init, params start at index 1
                 groupNum = 11;
                 break;
@@ -90,6 +90,20 @@ public class RegexHandler {
     }
 
     /**
+     * Check if string is a number
+     * @param arg The String to check
+     * @return The int the String contains or -1 is String is not a number
+     */
+    int getNum(String arg) {
+        Pattern p = Pattern.compile("\\d");
+        if (p.matcher(arg).find()) {
+            return Integer.parseInt(arg);
+        } else {
+            return -1;
+        }
+    }
+
+    /**
      * Check if input is valid
      * @param arg input arguments
      * @return true if input is valid
@@ -97,6 +111,6 @@ public class RegexHandler {
     boolean isValid(String arg) {
         //check if arg matches pattern and last char is not ";" and no new line char exists
         return pattern.matcher(arg).find() && !arg.substring(arg.length() - 1).equals(";")
-                && !arg.matches("\n") && !arg.matches("\r");
+                && !arg.contains("\\n") && !arg.contains("\\r");
     }
 }

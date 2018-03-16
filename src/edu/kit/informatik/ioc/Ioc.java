@@ -1,7 +1,7 @@
 package edu.kit.informatik.ioc;
 
 class Ioc {
-    private final int id;
+    private final String id;
     private final String code;
     private final String country;
     private final int year;
@@ -14,10 +14,18 @@ class Ioc {
      * @param year The year the code has been added
      */
     Ioc(int id, String code, String country, int year) {
-        this.id = id;
+        this.id = String.format("%03d", id);
         this.code = code;
         this.country = country;
         this.year = year;
+    }
+
+    /**
+     * Get the ioc id
+     * @return The id of the ioc
+     */
+    public String getId() {
+        return id;
     }
 
     /**

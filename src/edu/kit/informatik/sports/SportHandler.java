@@ -1,6 +1,6 @@
 package edu.kit.informatik.sports;
 
-import edu.kit.informatik.listUtils.ListUtils;
+import edu.kit.informatik.utils.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -27,6 +27,6 @@ public class AthleteHandlerTest {
         String ex = "Error, this athlete already exists.";
         assertEquals("Failed", ex, handler.addAthlete(2, "name2", "name2", "USA", "winter", "bob"));
         assertEquals("Success", "OK", handler.addAthlete(5, "name5", "name5", "POL", "ball", "basketball"));
-        assertEquals("Success", ex, handler.addAthlete(5, "adad", "dsa", "RUS", "winter", "basketball"));
+        assertEquals("Success", ex, handler.addAthlete(5, "name5", "dsa", "RUS", "winter", "basketball"));
     }
 }

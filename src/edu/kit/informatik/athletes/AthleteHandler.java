@@ -17,7 +17,7 @@ public class AthleteHandler {
      * @return String, OK if successful, else error message
      */
     public String addAthlete(int id, String firstName, String lastName, String country,
-                             String sport, String discipline) { //TODO only allow id at patter 0001
+                             String sport, String discipline) {
         if (getIndex(id) == -1) {
             athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
             return "OK";
@@ -27,13 +27,23 @@ public class AthleteHandler {
     }
 
     /**
+     * Create a summary of athletes
+     * @param sport The sport they are doing
+     * @param discipline The discipline they are doing
+     * @return A formatted String list containing the summary
+     */
+    public String summaryAthletes(String sport, String discipline) {
+        return "";
+    }
+
+    /**
      * Get the index of the item where the requested id is located
      * @param id The id to search for
      * @return The id if found, else -1
      */
     private int getIndex(int id) {
         for (int i = 0; i < athletes.size(); i++) {
-            if (athletes.get(i).getId() == id) {
+            if (athletes.get(i).getId().equals(String.format("%04d", id))) {
                 return i;
             }
         }

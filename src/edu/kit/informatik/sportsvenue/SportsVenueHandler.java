@@ -19,7 +19,8 @@ public class SportsVenueHandler {
      * @param seats The amount of seat available
      * @return String containing "OK" if successful and error message if not
      */
-    public String addSportsVenue(Integer id, String country, String location, String name, int openingYear, Integer seats) {
+    public String addSportsVenue(Integer id, String country, String location, String name,
+                                 int openingYear, Integer seats) {
         IocHandler handler = new IocHandler();
         int iocExists = handler.getIndex(handler.toIOC(country));
         if (getIndex(id) == -1 && iocExists != -1) {
@@ -53,7 +54,7 @@ public class SportsVenueHandler {
         StringBuilder output = new StringBuilder();
         int index = 0;
 
-        for (SportsVenue item: sportsVenues ) {
+        for (SportsVenue item: sportsVenues) {
             if (item.getCountry().equals(country)) {
                 index++;
 
@@ -76,7 +77,7 @@ public class SportsVenueHandler {
      */
     private Integer getIndex(int id) {
         for (int i = 0; i < sportsVenues.size(); i++) {
-            if (sportsVenues.get(i).getId() == id) {
+            if (sportsVenues.get(i).getId().equals(String.format("%03d", id))) {
                 return i;
             }
         }

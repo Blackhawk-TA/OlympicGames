@@ -1,7 +1,7 @@
 package edu.kit.informatik.sportsvenue;
 
 class SportsVenue {
-    private final Integer id;
+    private final String id;
     private final String country;
     private final String location;
     private final String name;
@@ -17,8 +17,8 @@ class SportsVenue {
      * @param openingYear The year when the sports venue first opened
      * @param seats The amount of seat available
      */
-    SportsVenue(Integer id, String country, String location, String name, int openingYear, Integer seats) {
-        this.id = id;
+    SportsVenue(int id, String country, String location, String name, int openingYear, Integer seats) {
+        this.id = String.format("%03d", id);
         this.country = country;
         this.location = location;
         this.name = name;
@@ -30,7 +30,7 @@ class SportsVenue {
      * Get the id of the sports venue
      * @return The id of the sports venue
      */
-    Integer getId() {
+    String getId() {
         return id;
     }
 

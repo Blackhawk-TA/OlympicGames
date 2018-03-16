@@ -15,12 +15,48 @@ public class IocHandler {
      * @return String containing "OK" if successful and error message if not
      */
     public String addIOC(int id, String code, String country, int year) {
-        if (getIndex(code) == -1) {
-            ioc.add(new Ioc(id, code, country, year)); //TODO either check for id and country duplicate or generate them
+        if (getIndex(code) == -1 && getIdIndex(id) == -1 && getCountryIndex(country) == -1) {
+            ioc.add(new Ioc(id, code, country, year));
             return "OK";
         } else {
-            return "Error, this athlete already exists.";
+            return "Error, this IOC already exists.";
         }
+    }
+
+    /**
+     * Create a list of all IOC code
+     * @return A formatted String with all IOC codes
+     */
+    public String listIOC() {
+        return "";
+    }
+
+    /**
+     * Get the index of the item where the requested id is located
+     * @param id The id to search for
+     * @return The index of the id if found, else -1
+     */
+    private int getIdIndex(int id) {
+        for (int i = 0; i < ioc.size(); i++) {
+            if (ioc.get(i).getId().equals(String.format("%03d", id))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Get the index of the item where the requested country is located
+     * @param country The country to search for
+     * @return The index of the country if found, else -1
+     */
+    private int getCountryIndex(String country) {
+        for (int i = 0; i < ioc.size(); i++) {
+            if (ioc.get(i).getCountry().equals(country)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**

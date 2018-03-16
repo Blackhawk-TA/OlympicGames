@@ -1,4 +1,4 @@
-package edu.kit.informatik.listUtils;
+package edu.kit.informatik.utils;
 
 import java.util.List;
 

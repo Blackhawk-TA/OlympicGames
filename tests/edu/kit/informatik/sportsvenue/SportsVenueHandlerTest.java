@@ -13,12 +13,12 @@ public class SportsVenueHandlerTest {
 
     @Before
     public void setUp() {
-        handler = new SportsVenueHandler();
         iocHandler = new IocHandler();
         iocHandler.addIOC(1, "CTR1", "country1", 1990);
         iocHandler.addIOC(2, "CTR2", "country2", 1995);
         iocHandler.addIOC(3, "CTR3", "country3", 1985);
 
+        handler = new SportsVenueHandler();
         handler.addSportsVenue(1, "country1", "loc1", "name1", 1997, 2000);
         handler.addSportsVenue(4, "country1", "loc4", "name4", 1999, 500);
         handler.addSportsVenue(5, "country1", "loc5", "name5", 1993, 500);

@@ -24,7 +24,7 @@ public class IocHandlerTest {
 
     @Test
     public void addIOC() {
-        String ex = "Error, this athlete already exists.";
+        String ex = "Error, this IOC already exists.";
         assertEquals("Failed", ex, handler.addIOC(2, "CTR2", "country2", 1995));
         assertEquals("Success", "OK", handler.addIOC(4, "CTR4", "country4", 2000));
         assertEquals("Failed", ex, handler.addIOC(4, "CTR4", "country4", 2000));
