@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IocHandler {
-    private final List<Ioc> ioc = new ArrayList<>();
+    private final List<Ioc> iocList = new ArrayList<>();
 
     /**
      * Add an ioc for a country
@@ -16,7 +16,7 @@ public class IocHandler {
      */
     public String addIOC(int id, String code, String country, Integer year) {
         if (getIndex(code) == -1 && getIdIndex(id) == -1 && getCountryIndex(country) == -1) {
-            ioc.add(new Ioc(id, code, country, year));
+            iocList.add(new Ioc(id, code, country, year));
             return "OK";
         } else {
             return "Error, this IOC already exists.";
@@ -28,7 +28,7 @@ public class IocHandler {
      * @return A formatted String with all IOC codes
      */
     public String listIOC() {
-        ioc.sort((Ioc o1, Ioc o2) -> {
+        iocList.sort((Ioc o1, Ioc o2) -> {
             if (o1.getYear().equals(o2.getYear()))
                 return o1.getId().compareTo(o2.getId());
             else
@@ -36,7 +36,7 @@ public class IocHandler {
         });
 
         StringBuilder output = new StringBuilder();
-        for (Ioc item: ioc) {
+        for (Ioc item: iocList) {
             output.append(String.format(
                     "%d %s %s %s\n", item.getYear(), item.getId(), item.getCode(), item.getCountry()));
         }
@@ -53,8 +53,8 @@ public class IocHandler {
      * @return The index of the id if found, else -1
      */
     private int getIdIndex(int id) {
-        for (int i = 0; i < ioc.size(); i++) {
-            if (ioc.get(i).getId().equals(String.format("%03d", id))) {
+        for (int i = 0; i < iocList.size(); i++) {
+            if (iocList.get(i).getId().equals(String.format("%03d", id))) {
                 return i;
             }
         }
@@ -67,8 +67,8 @@ public class IocHandler {
      * @return The index of the country if found, else -1
      */
     private int getCountryIndex(String country) {
-        for (int i = 0; i < ioc.size(); i++) {
-            if (ioc.get(i).getCountry().equals(country)) {
+        for (int i = 0; i < iocList.size(); i++) {
+            if (iocList.get(i).getCountry().equals(country)) {
                 return i;
             }
         }
@@ -81,8 +81,8 @@ public class IocHandler {
      * @return The index of the code if found, else -1
      */
     public int getIndex(String code) {
-        for (int i = 0; i < ioc.size(); i++) {
-            if (ioc.get(i).getCode().equals(code)) {
+        for (int i = 0; i < iocList.size(); i++) {
+            if (iocList.get(i).getCode().equals(code)) {
                 return i;
             }
         }
@@ -90,16 +90,10 @@ public class IocHandler {
     }
 
     /**
-     * Get the IOC of a country
-     * @param country The country the IOC is searched for
-     * @return The to the country referring IOC
+     * Get the IOC list
+     * @return The IOC list
      */
-    public String toIOC(String country) {
-        for (Ioc item: ioc) {
-            if (item.getCountry().equals(country)) {
-                return item.getCode();
-            }
-        }
-        return "";
+    public List<Ioc> getIocList() {
+        return iocList;
     }
 }

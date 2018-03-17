@@ -49,10 +49,4 @@ public class IocHandlerTest {
         assertEquals("Success", 1, handler.getIndex("CTR2"));
         assertEquals("Success", 2, handler.getIndex("CTR3"));
     }
-
-    @Test
-    public void toIOC() {
-        assertEquals("Success", "CTR1", handler.toIOC("country1"));
-        assertEquals("Failed", "", handler.toIOC("country0"));
-    }
 }

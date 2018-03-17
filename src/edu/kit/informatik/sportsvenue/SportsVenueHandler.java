@@ -1,6 +1,7 @@
 package edu.kit.informatik.sportsvenue;
 
-import edu.kit.informatik.ioc.IocHandler;
+import edu.kit.informatik.core.Core;
+import edu.kit.informatik.ioc.Ioc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,10 @@ public class SportsVenueHandler {
      */
     public String addSportsVenue(Integer id, String country, String location, String name,
                                  int openingYear, Integer seats) {
-        IocHandler handler = new IocHandler();
-        System.out.println(handler.toIOC("country1"));
-        System.out.println(handler.toIOC("country2"));
-        System.out.println(handler.toIOC("country3"));
-        int iocExists = handler.getIndex(handler.toIOC(country));
-        if (getIndex(id) == -1 && iocExists != -1) {
+        if (getIndex(id) == -1 && iocExists(country)) {
             sportsVenues.add(new SportsVenue(id, country, location, name, openingYear, seats));
             return "OK";
-        } else if (iocExists == -1) {
+        } else if (!iocExists(country)) {
             return "Error, IOC does not exist.";
         } else {
             return "Error, this sports venue already exists.";
@@ -78,5 +74,27 @@ public class SportsVenueHandler {
             }
         }
         return -1;
+    }
+
+    /**
+     * Get the list of sport venues
+     * @return The list of sport venues
+     */
+    public List<SportsVenue> getSportsVenues() {
+        return sportsVenues;
+    }
+
+    /**
+     * Get the IOC of a country
+     * @param country The country the IOC is searched for
+     * @return The to the country referring IOC
+     */
+    private boolean iocExists(String country) {
+        for (Ioc item: Core.getIocList()) {
+            if (item.getCountry().equals(country)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

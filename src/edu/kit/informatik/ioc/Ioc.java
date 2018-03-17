@@ -1,6 +1,6 @@
 package edu.kit.informatik.ioc;
 
-class Ioc {
+public class Ioc {
     private final String id;
     private final String code;
     private final String country;
@@ -24,7 +24,7 @@ class Ioc {
      * Get the ioc id
      * @return The id of the ioc
      */
-    String getId() {
+    public String getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ class Ioc {
      * Get the ioc code
      * @return The ioc code of the country
      */
-    String getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -40,7 +40,7 @@ class Ioc {
      * Get the country of a ioc code
      * @return The country which the ioc code refers to
      */
-    String getCountry() {
+    public String getCountry() {
         return country;
     }
 

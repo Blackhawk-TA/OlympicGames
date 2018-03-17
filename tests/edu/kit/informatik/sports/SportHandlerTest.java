@@ -1,5 +1,6 @@
 package edu.kit.informatik.sports;
 
+import edu.kit.informatik.core.Core;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class SportHandlerTest {
 
     @Before
     public void setUp() {
-        handler = new SportHandler();
+        handler = Core.getSportHandler();
         handler.addDiscipline("ball", "football");
         handler.addDiscipline("ball", "baseball");
         handler.addDiscipline("ball", "soccer");

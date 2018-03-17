@@ -44,7 +44,7 @@ public class AthleteHandler {
         for (Athlete item: athletes) {
             if (item.getSport().equals(sport) && item.getDiscipline().equals(discipline)) {
                 output.append(String.format(
-                        "%s %s %s %s\n", item.getId(), item.getFirstName(), item.getLastName(), item.getMedals()));
+                        "%s %s %s %s\n", item.getId(), item.getFirstName(), item.getLastName(), item.getMedals())); //TODO calc medals
             }
         }
 
@@ -66,5 +66,13 @@ public class AthleteHandler {
             }
         }
         return -1;
+    }
+
+    /**
+     * Get the athlete list
+     * @return The athlete list
+     */
+    public List<Athlete> getAthletes() {
+        return athletes;
     }
 }

@@ -1,6 +1,6 @@
 package edu.kit.informatik.athletes;
 
-class Athlete {
+public class Athlete {
     private final String id;
     private final String firstName;
     private final String lastName;
@@ -32,7 +32,7 @@ class Athlete {
      * Get the id of the athlete
      * @return The id in the patter 0001
      */
-    String getId() {
+    public String getId() {
         return id;
     }
 
@@ -56,7 +56,7 @@ class Athlete {
      * Get the country the athlete is from
      * @return The country
      */
-    String getCountry() {
+    public String getCountry() {
         return country;
     }
 
@@ -64,7 +64,7 @@ class Athlete {
      * Get the sport the athlete is doing
      * @return The sport
      */
-    String getSport() {
+    public String getSport() {
         return sport;
     }
 
@@ -72,7 +72,7 @@ class Athlete {
      * Get the discipline the athlete is doing
      * @return The discipline
      */
-    String getDiscipline() {
+    public String getDiscipline() {
         return discipline;
     }
 

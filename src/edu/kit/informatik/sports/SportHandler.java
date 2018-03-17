@@ -57,4 +57,12 @@ public class SportHandler {
         }
         return -1;
     }
+
+    /**
+     * Get the discipline list
+     * @return The discipline list
+     */
+    public List<Discipline> getDisciplines() {
+        return disciplines;
+    }
 }
