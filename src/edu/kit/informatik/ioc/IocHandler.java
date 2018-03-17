@@ -14,7 +14,7 @@ public class IocHandler {
      * @param year The year the code has been added
      * @return String containing "OK" if successful and error message if not
      */
-    public String addIOC(int id, String code, String country, int year) {
+    public String addIOC(int id, String code, String country, Integer year) {
         if (getIndex(code) == -1 && getIdIndex(id) == -1 && getCountryIndex(country) == -1) {
             ioc.add(new Ioc(id, code, country, year));
             return "OK";
@@ -28,7 +28,23 @@ public class IocHandler {
      * @return A formatted String with all IOC codes
      */
     public String listIOC() {
-        return "";
+        ioc.sort((Ioc o1, Ioc o2) -> {
+            if (o1.getYear().equals(o2.getYear()))
+                return o1.getId().compareTo(o2.getId());
+            else
+                return o1.getYear().compareTo(o2.getYear());
+        });
+
+        StringBuilder output = new StringBuilder();
+        for (Ioc item: ioc) {
+            output.append(String.format(
+                    "%d %s %s %s\n", item.getYear(), item.getId(), item.getCode(), item.getCountry()));
+        }
+
+        if (output.length() >= 2)
+            output.setLength(output.length() - 1); //Remove last linebreak
+
+        return output.toString();
     }
 
     /**

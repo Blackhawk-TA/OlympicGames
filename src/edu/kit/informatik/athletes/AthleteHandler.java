@@ -1,7 +1,6 @@
 package edu.kit.informatik.athletes;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class AthleteHandler {
@@ -34,32 +33,23 @@ public class AthleteHandler {
      * @return A formatted String list containing the summary
      */
     public String summaryAthletes(String sport, String discipline) {
-        athletes.sort(new Comparator<Athlete>() {
-            @Override
-            public int compare(Athlete o1, Athlete o2) {
-                if (o1.getMedals().equals(o2.getMedals())) {
-                    return o1.getId().compareTo(o2.getId());
-                } else {
-                    return o1.getMedals().compareTo(o2.getMedals());
-                }
-            }
+        athletes.sort((Athlete o1, Athlete o2) -> {
+            if (o1.getMedals().equals(o2.getMedals()))
+                return o1.getId().compareTo(o2.getId());
+            else
+                return o1.getMedals().compareTo(o2.getMedals());
         });
 
-
         StringBuilder output = new StringBuilder();
-        int index = 0;
-
         for (Athlete item: athletes) {
             if (item.getSport().equals(sport) && item.getDiscipline().equals(discipline)) {
-                //Create output line
-                String ln = "(" + index + " " + item.getId() + " " + item.getFirstName() + " "
-                                + item.getLastName() + item.getMedals() + ")\n";
-                output.append(ln);
+                output.append(String.format(
+                        "%s %s %s %s\n", item.getId(), item.getFirstName(), item.getLastName(), item.getMedals()));
             }
         }
+
         if (output.length() >= 2)
-            output.setLength(output.length() - 2); //Remove last linebreak
-        //Comparator.comparing(SportsVenue::getSeats);
+            output.setLength(output.length() - 1); //Remove last linebreak
 
         return output.toString();
     }

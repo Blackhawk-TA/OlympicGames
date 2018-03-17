@@ -25,6 +25,7 @@ class Athlete {
         this.country = country;
         this.sport = sport;
         this.discipline = discipline;
+        this.medals = 0;
     }
 
     /**
@@ -49,6 +50,14 @@ class Athlete {
      */
     String getLastName() {
         return lastName;
+    }
+
+    /**
+     * Get the country the athlete is from
+     * @return The country
+     */
+    String getCountry() {
+        return country;
     }
 
     /**
@@ -77,8 +86,9 @@ class Athlete {
 
     /**
      * Add a medal to the athlete
+     * @param amount Amount of medals to add
      */
-    void addMedal() {
-        medals++;
+    void addMedals(int amount) {
+        medals += amount;
     }
 }

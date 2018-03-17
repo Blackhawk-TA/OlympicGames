@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountSystem {
-    private List<Admin> accounts = new ArrayList<>();
+    private final List<Admin> accounts = new ArrayList<>();
 
     /**
      * Login into an admin account

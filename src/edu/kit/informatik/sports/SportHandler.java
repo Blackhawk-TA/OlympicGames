@@ -26,7 +26,22 @@ public class SportHandler {
      * @return The list of sports and disciplines
      */
     public String listSports() {
-        return "";
+        disciplines.sort((Discipline o1, Discipline o2) -> {
+            if (o1.getSport().equals(o2.getSport()))
+                return o1.getDiscipline().compareTo(o2.getDiscipline());
+            else
+                return o1.getSport().compareTo(o2.getSport());
+        });
+
+        StringBuilder output = new StringBuilder();
+        for (Discipline item: disciplines) {
+            output.append(String.format("%s %s\n", item.getSport(), item.getDiscipline()));
+        }
+
+        if (output.length() >= 2)
+            output.setLength(output.length() - 1); //Remove last linebreak
+
+        return output.toString();
     }
 
     /**

@@ -31,6 +31,19 @@ public class IocHandlerTest {
     }
 
     @Test
+    public void listIOC() {
+        handler.addIOC(9, "CTR9", "country9", 1990);
+        handler.addIOC(6, "CTR6", "country6", 1985);
+        handler.addIOC(4, "CTR4", "country4", 1985);
+
+        String ex = "1985 003 CTR3 country3\n1985 004 CTR4 country4\n1985 006 CTR6 country6\n" +
+                    "1990 001 CTR1 country1\n1990 009 CTR9 country9\n1995 002 CTR2 country2";
+        String out = handler.listIOC();
+        System.out.println("\nList IOC:\n" + out);
+        assertEquals("Sorted", ex, out);
+    }
+
+    @Test
     public void getIndex() {
         assertEquals("Failed", -1, handler.getIndex("CTR0"));
         assertEquals("Success", 1, handler.getIndex("CTR2"));

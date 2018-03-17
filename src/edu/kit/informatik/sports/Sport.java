@@ -5,7 +5,7 @@ import java.util.List;
 
 class Sport {
     private final String name;
-    private List<String> sports = new ArrayList<>();
+    private final List<String> sports = new ArrayList<>();
 
     /**
      * Constructor for the sport

@@ -4,7 +4,7 @@ class Ioc {
     private final String id;
     private final String code;
     private final String country;
-    private final int year;
+    private final Integer year;
 
     /**
      * Constructor for IOC codes
@@ -13,7 +13,7 @@ class Ioc {
      * @param country The country which the code stands for
      * @param year The year the code has been added
      */
-    Ioc(int id, String code, String country, int year) {
+    Ioc(int id, String code, String country, Integer year) {
         this.id = String.format("%03d", id);
         this.code = code;
         this.country = country;
@@ -24,7 +24,7 @@ class Ioc {
      * Get the ioc id
      * @return The id of the ioc
      */
-    public String getId() {
+    String getId() {
         return id;
     }
 
@@ -42,5 +42,13 @@ class Ioc {
      */
     String getCountry() {
         return country;
+    }
+
+    /**
+     * Get the year the ioc has been introduced
+     * @return The year
+     */
+    Integer getYear() {
+        return year;
     }
 }

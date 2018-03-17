@@ -7,11 +7,11 @@ import edu.kit.informatik.sports.SportHandler;
 import edu.kit.informatik.sportsvenue.SportsVenueHandler;
 
 public class Core {
-    private AccountSystem system = new AccountSystem();
-    private IocHandler iocHandler = new IocHandler();
-    private SportHandler sportHandler = new SportHandler();
-    private SportsVenueHandler venueHandler = new SportsVenueHandler();
-    private AthleteHandler athleteHandler = new AthleteHandler();
+    private final AccountSystem system = new AccountSystem();
+    private final IocHandler iocHandler = new IocHandler();
+    private final SportHandler sportHandler = new SportHandler();
+    private final SportsVenueHandler venueHandler = new SportsVenueHandler();
+    private final AthleteHandler athleteHandler = new AthleteHandler();
 
     /**
      * Get the Account System

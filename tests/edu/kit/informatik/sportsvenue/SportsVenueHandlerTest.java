@@ -1,5 +1,6 @@
 package edu.kit.informatik.sportsvenue;
 
+import edu.kit.informatik.core.Core;
 import edu.kit.informatik.ioc.IocHandler;
 import org.junit.After;
 import org.junit.Before;

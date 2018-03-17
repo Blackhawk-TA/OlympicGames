@@ -3,11 +3,10 @@ package edu.kit.informatik.sportsvenue;
 import edu.kit.informatik.ioc.IocHandler;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class SportsVenueHandler {
-    private List<SportsVenue> sportsVenues = new ArrayList<>();
+    private final List<SportsVenue> sportsVenues = new ArrayList<>();
 
     /**
      * Add a sports venue
@@ -22,6 +21,9 @@ public class SportsVenueHandler {
     public String addSportsVenue(Integer id, String country, String location, String name,
                                  int openingYear, Integer seats) {
         IocHandler handler = new IocHandler();
+        System.out.println(handler.toIOC("country1"));
+        System.out.println(handler.toIOC("country2"));
+        System.out.println(handler.toIOC("country3"));
         int iocExists = handler.getIndex(handler.toIOC(country));
         if (getIndex(id) == -1 && iocExists != -1) {
             sportsVenues.add(new SportsVenue(id, country, location, name, openingYear, seats));
@@ -39,17 +41,12 @@ public class SportsVenueHandler {
      * @return A list of sport venues of the requested country
      */
     public String listSportVenues(String country) { //TODO add sorting
-        sportsVenues.sort(new Comparator<SportsVenue>() {
-            @Override
-            public int compare(SportsVenue o1, SportsVenue o2) {
-                if (o1.getSeats().equals(o2.getSeats())) {
-                    return o1.getId().compareTo(o2.getId());
-                } else {
-                    return o1.getSeats().compareTo(o2.getSeats());
-                }
-            }
+        sportsVenues.sort((SportsVenue o1, SportsVenue o2) -> {
+            if (o1.getSeats().equals(o2.getSeats()))
+                return o1.getId().compareTo(o2.getId());
+            else
+                return o1.getSeats().compareTo(o2.getSeats());
         });
-
 
         StringBuilder output = new StringBuilder();
         int index = 0;
@@ -57,14 +54,13 @@ public class SportsVenueHandler {
         for (SportsVenue item: sportsVenues) {
             if (item.getCountry().equals(country)) {
                 index++;
-
-                //Create output line
-                String ln = "(" + index + " " + item.getId() + " " + item.getLocation() + " " + item.getSeats() + ")\n";
-                output.append(ln);
+                output.append(String.format(
+                        "(%d %s %s %d)\n", index, item.getId(), item.getLocation(), item.getSeats()));
             }
         }
-        //output.setLength(output.length() - 2); //Remove last linebreak
-        //Comparator.comparing(SportsVenue::getSeats);
+
+        if (output.length() >= 2)
+            output.setLength(output.length() - 1); //Remove last linebreak
 
         return output.toString();
     }
