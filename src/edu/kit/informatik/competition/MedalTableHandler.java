@@ -55,9 +55,16 @@ public class MedalTableHandler {
 
         for (MedalTable item: medalTable) {
             index++;
-            output.append(String.format("(%d %s %s %s %d %d %d %d)", index, item.getIocId(), item.getIoc(),
+            output.append(String.format("(%d %s %s %s %d %d %d %d)\n", index, item.getIocId(), item.getIoc(),
                     item.getCountry(), item.getGold(), item.getSilver(), item.getBronze(), item.getMedals()));
         }
+
+        if (output.length() >= 1)
+            output.setLength(output.length() - 1); //Remove last linebreak
+
+        if (output.length() == 0)
+            output.append("Error, no competitions to create a medal table registered yet.");
+
         return output.toString();
     }
 }

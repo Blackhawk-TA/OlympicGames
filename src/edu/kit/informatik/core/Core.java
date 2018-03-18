@@ -9,13 +9,29 @@ import edu.kit.informatik.sports.*;
 import edu.kit.informatik.sportsvenue.*;
 
 public class Core {
-    private static AccountSystem accountSystem = new AccountSystem();
-    private static AthleteHandler athleteHandler = new AthleteHandler();
-    private static IocHandler iocHandler = new IocHandler();
-    private static SportHandler sportHandler = new SportHandler();
-    private static SportsVenueHandler sportsVenueHandler = new SportsVenueHandler();
-    private static CompetitionHandler competitionHandler = new CompetitionHandler();
-    private static MedalTableHandler medalTableHandler = new MedalTableHandler();
+    private static AccountSystem accountSystem;
+    private static AthleteHandler athleteHandler;
+    private static IocHandler iocHandler;
+    private static SportHandler sportHandler;
+    private static SportsVenueHandler sportsVenueHandler;
+    private static CompetitionHandler competitionHandler;
+    private static MedalTableHandler medalTableHandler;
+
+    /**
+     * Init the system Core
+     * @param init Setting used to check if function is running on init or on reset
+     */
+    public static void init(boolean init) {
+        if (init)
+            accountSystem = new AccountSystem();
+
+        athleteHandler = new AthleteHandler();
+        iocHandler = new IocHandler();
+        sportHandler = new SportHandler();
+        sportsVenueHandler = new SportsVenueHandler();
+        competitionHandler = new CompetitionHandler();
+        medalTableHandler = new MedalTableHandler();
+    }
 
     /**
      * Resets the data in the system except admin accounts
@@ -28,12 +44,7 @@ public class Core {
         competitionHandler = null;
         medalTableHandler = null;
 
-        athleteHandler = new AthleteHandler();
-        iocHandler = new IocHandler();
-        sportHandler = new SportHandler();
-        sportsVenueHandler = new SportsVenueHandler();
-        competitionHandler = new CompetitionHandler();
-        medalTableHandler = new MedalTableHandler();
+        init(false);
     }
 
     /**

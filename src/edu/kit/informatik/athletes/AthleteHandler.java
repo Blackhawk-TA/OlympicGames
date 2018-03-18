@@ -1,8 +1,5 @@
 package edu.kit.informatik.athletes;
 
-import edu.kit.informatik.competition.Competition;
-import edu.kit.informatik.core.Core;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class AthleteHandler {
      * @param discipline The discipline the athlete is doing
      * @return String, OK if successful, else error message
      */
-    public String addAthlete(int id, String firstName, String lastName, String country,
+    public String addAthlete(String id, String firstName, String lastName, String country,
                              String sport, String discipline) {
         if (getIndex(id) == -1) {
             athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
@@ -47,28 +44,18 @@ public class AthleteHandler {
         for (Athlete item: athletes) {
             if (item.getSport().equals(sport) && item.getDiscipline().equals(discipline)) {
                 output.append(String.format(
-                        "%s %s %s %s\n", item.getId(), item.getFirstName(), item.getLastName(), getMedals(item)));
+                        "%s %s %s %s\n", item.getId(), item.getFirstName(), item.getLastName(), item.getMedals()));
             }
         }
 
-        if (output.length() >= 2)
+        if (output.length() >= 1)
             output.setLength(output.length() - 1); //Remove last linebreak
 
+        if (output.length() == 0)
+            output.append("Error, no athletes registered yet.");
+
+
         return output.toString();
-    }
-
-    private int getMedals(Athlete athlete) {
-        List<Competition> competitions = Core.getCompetitionHandler().getCompetitions();
-        int medals = 0;
-
-        for (Competition competition: competitions) {
-            if (competition.getId().equals(athlete.getId())) {
-                if (competition.getGold() == 1 ^ competition.getSilver() == 1 ^ competition.getBronze() == 1) {
-                    medals++;
-                }
-            }
-        }
-        return medals;
     }
 
     /**
@@ -76,9 +63,9 @@ public class AthleteHandler {
      * @param id The id to search for
      * @return The id if found, else -1
      */
-    private int getIndex(int id) {
+    private int getIndex(String id) {
         for (int i = 0; i < athletes.size(); i++) {
-            if (athletes.get(i).getId().equals(String.format("%04d", id))) {
+            if (athletes.get(i).getId().equals(id)) {
                 return i;
             }
         }

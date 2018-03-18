@@ -13,6 +13,8 @@ public class InputHandler {
      * Handles all console commands
      */
     public static void inputs() {
+        Core.init(true);
+
         while (running) {
             String input = Terminal.readLine();
             String[] groups = REG_CMD.createGroups(input);
@@ -44,10 +46,10 @@ public class InputHandler {
     //Handles inputs when an admin is logged in
     private static void inputsLogin(String arg, String[] groups) {
         if (arg.matches("quit") && REG_CMD.hasParam(groups, 0)) {
-            Core.reset();
+            running = false;
             Terminal.printLine("OK");
         } else if (arg.matches("reset") && REG_CMD.hasParam(groups, 0)) {
-            running = false;
+            Core.reset();
             Terminal.printLine("OK");
         } else if (arg.matches("logout-admin") && REG_CMD.hasParam(groups, 0)) {
             Terminal.printLine(Core.getSystem().logout());
@@ -56,9 +58,9 @@ public class InputHandler {
             int param4 = REG_CMD.getNum(REG_CMD.getParam(groups, 4));
             int param5 = REG_CMD.getNum(REG_CMD.getParam(groups, 5));
 
-            if (param0 != -1 && param4 != -1 && param5 != -1) {
+            if (param0 != -1 && param4 != -1 && param5 != -1 && REG_CMD.getParam(groups, 0).length() == 3) {
                 Terminal.printLine(Core.getVenueHandler().addSportsVenue(
-                        param0,
+                        REG_CMD.getParam(groups, 0),
                         REG_CMD.getParam(groups, 1),
                         REG_CMD.getParam(groups, 2),
                         REG_CMD.getParam(groups, 3),
@@ -67,8 +69,7 @@ public class InputHandler {
                 Terminal.printError("invalid input parameters.");
             }
         } else if (arg.matches("list-sports-venue") && REG_CMD.hasParam(groups, 0)) {
-            Terminal.printLine(Core.getVenueHandler().listSportVenues(
-                    REG_CMD.getParam(groups, 0)));
+            Terminal.printLine(Core.getVenueHandler().listSportVenues(REG_CMD.getParam(groups, 0)));
         } else if (arg.matches("add-olympic-sport") && REG_CMD.hasParam(groups, 2)) {
             Terminal.printLine(Core.getSportHandler().addDiscipline(
                     REG_CMD.getParam(groups, 0),
@@ -79,9 +80,9 @@ public class InputHandler {
             int param0 = REG_CMD.getNum(REG_CMD.getParam(groups, 0));
             int param3 = REG_CMD.getNum(REG_CMD.getParam(groups, 3));
 
-            if (param0 != -1 && param3 != -1) {
+            if (param0 != -1 && param3 != -1 && REG_CMD.getParam(groups, 0).length() == 3) {
                 Terminal.printLine(Core.getIocHandler().addIOC(
-                        param0, REG_CMD.getParam(groups, 1), REG_CMD.getParam(groups, 2), param3));
+                        REG_CMD.getParam(groups, 0), REG_CMD.getParam(groups, 1), REG_CMD.getParam(groups, 2), param3));
             } else {
                 Terminal.printError("invalid input parameters.");
             }
@@ -90,9 +91,9 @@ public class InputHandler {
         } else if (arg.matches("add-athlete") && REG_CMD.hasParam(groups, 6)) {
             int param0 = REG_CMD.getNum(REG_CMD.getParam(groups, 0));
 
-            if (param0 != -1) {
+            if (param0 != -1 && REG_CMD.getParam(groups, 0).length() == 4) {
                 Terminal.printLine(Core.getAthleteHandler().addAthlete(
-                        param0, REG_CMD.getParam(groups, 1), REG_CMD.getParam(groups, 2),
+                        REG_CMD.getParam(groups, 0), REG_CMD.getParam(groups, 1), REG_CMD.getParam(groups, 2),
                         REG_CMD.getParam(groups, 3), REG_CMD.getParam(groups, 4), REG_CMD.getParam(groups, 5)));
             } else {
                 Terminal.printError("invalid input parameters.");
@@ -102,12 +103,14 @@ public class InputHandler {
                     REG_CMD.getParam(groups, 0),
                     REG_CMD.getParam(groups, 1)));
         } else if (arg.matches("add-competition") && REG_CMD.hasParam(groups, 8)) {
+            int param0 = REG_CMD.getNum(REG_CMD.getParam(groups, 0));
             int param1 = REG_CMD.getNum(REG_CMD.getParam(groups, 1));
             int param5 = REG_CMD.getNum(REG_CMD.getParam(groups, 5));
             int param6 = REG_CMD.getNum(REG_CMD.getParam(groups, 6));
             int param7 = REG_CMD.getNum(REG_CMD.getParam(groups, 7));
 
-            if (param1 != -1 && param5 != -1 && param6 != -1 && param7 != -1) {
+            if (param0 != -1 && param1 != -1 && param5 != -1 && param6 != -1 && param7 != -1
+                    && REG_CMD.getParam(groups, 0).length() == 4) {
                 Terminal.printLine(Core.getCompetitionHandler().addCompetition(
                         REG_CMD.getParam(groups, 0), param1, REG_CMD.getParam(groups, 2),
                         REG_CMD.getParam(groups, 3), REG_CMD.getParam(groups, 4), param5, param6, param7));

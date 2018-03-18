@@ -17,8 +17,8 @@ public class SportsVenue {
      * @param openingYear The year when the sports venue first opened
      * @param seats The amount of seat available
      */
-    SportsVenue(int id, String country, String location, String name, int openingYear, Integer seats) {
-        this.id = String.format("%03d", id);
+    SportsVenue(String id, String country, String location, String name, int openingYear, Integer seats) {
+        this.id = id;
         this.country = country;
         this.location = location;
         this.name = name;

@@ -1,5 +1,6 @@
 package edu.kit.informatik.competition;
 
+import edu.kit.informatik.core.Core;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,8 @@ public class MedalTableHandlerTest {
 
     @Before
     public void setUp() {
+        Core.init(true);
+
         handler = new MedalTableHandler();
     }
 

@@ -38,8 +38,11 @@ public class SportHandler {
             output.append(String.format("%s %s\n", item.getSport(), item.getDiscipline()));
         }
 
-        if (output.length() >= 2)
+        if (output.length() >= 1)
             output.setLength(output.length() - 1); //Remove last linebreak
+
+        if (output.length() == 0)
+            output.append("Error, no sports registered yet.");
 
         return output.toString();
     }

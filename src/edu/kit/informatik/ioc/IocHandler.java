@@ -14,7 +14,7 @@ public class IocHandler {
      * @param year The year the code has been added
      * @return String containing "OK" if successful and error message if not
      */
-    public String addIOC(int id, String code, String country, Integer year) {
+    public String addIOC(String id, String code, String country, Integer year) {
         if (getIndex(code) == -1 && getIdIndex(id) == -1 && getCountryIndex(country) == -1) {
             iocList.add(new Ioc(id, code, country, year));
             return "OK";
@@ -41,8 +41,11 @@ public class IocHandler {
                     "%d %s %s %s\n", item.getYear(), item.getId(), item.getCode(), item.getCountry()));
         }
 
-        if (output.length() >= 2)
+        if (output.length() >= 1)
             output.setLength(output.length() - 1); //Remove last linebreak
+
+        if (output.length() == 0)
+            output.append("Error, no IOC codes registered yet.");
 
         return output.toString();
     }
@@ -52,9 +55,9 @@ public class IocHandler {
      * @param id The id to search for
      * @return The index of the id if found, else -1
      */
-    private int getIdIndex(int id) {
+    private int getIdIndex(String id) {
         for (int i = 0; i < iocList.size(); i++) {
-            if (iocList.get(i).getId().equals(String.format("%03d", id))) {
+            if (iocList.get(i).getId().equals(id)) {
                 return i;
             }
         }

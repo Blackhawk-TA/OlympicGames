@@ -13,8 +13,8 @@ public class Ioc {
      * @param country The country which the code stands for
      * @param year The year the code has been added
      */
-    Ioc(int id, String code, String country, Integer year) {
-        this.id = String.format("%03d", id);
+    Ioc(String id, String code, String country, Integer year) {
+        this.id = id;
         this.code = code;
         this.country = country;
         this.year = year;

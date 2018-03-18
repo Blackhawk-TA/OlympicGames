@@ -19,7 +19,7 @@ public class SportsVenueHandler {
      * @param seats The amount of seat available
      * @return String containing "OK" if successful and error message if not
      */
-    public String addSportsVenue(Integer id, String country, String location, String name,
+    public String addSportsVenue(String id, String country, String location, String name,
                                  int openingYear, Integer seats) {
         if (getIndex(id) == -1 && iocExists(country)) {
             sportsVenues.add(new SportsVenue(id, country, location, name, openingYear, seats));
@@ -55,8 +55,11 @@ public class SportsVenueHandler {
             }
         }
 
-        if (output.length() >= 2)
+        if (output.length() >= 1)
             output.setLength(output.length() - 1); //Remove last linebreak
+
+        if (output.length() == 0)
+            output.append("Error, no sport venues registered yet.");
 
         return output.toString();
     }
@@ -67,9 +70,9 @@ public class SportsVenueHandler {
      * @param id The id to search for
      * @return The id if found, else -1
      */
-    private Integer getIndex(int id) {
+    private Integer getIndex(String id) {
         for (int i = 0; i < sportsVenues.size(); i++) {
-            if (sportsVenues.get(i).getId().equals(String.format("%03d", id))) {
+            if (sportsVenues.get(i).getId().equals(id)) {
                 return i;
             }
         }

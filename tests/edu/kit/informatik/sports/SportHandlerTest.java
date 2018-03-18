@@ -12,6 +12,8 @@ public class SportHandlerTest {
 
     @Before
     public void setUp() {
+        Core.init(true);
+
         handler = Core.getSportHandler();
         handler.addDiscipline("ball", "football");
         handler.addDiscipline("ball", "baseball");

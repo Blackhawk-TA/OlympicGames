@@ -18,8 +18,8 @@ public class Athlete {
      * @param sport The sport the athlete is doing
      * @param discipline The discipline the athlete is doing
      */
-    Athlete(int id, String firstName, String lastName, String country, String sport, String discipline) {
-        this.id = String.format("%04d", id);
+    Athlete(String id, String firstName, String lastName, String country, String sport, String discipline) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
