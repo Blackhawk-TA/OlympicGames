@@ -1,6 +1,6 @@
 package edu.kit.informatik.competition;
 
-public class Competition {
+class Competition {
     private final String id;
     private final int year;
     private final String country;

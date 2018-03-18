@@ -66,6 +66,5 @@ public class SportHandler {
      */
     public void reset() {
         disciplines = new ArrayList<>();
-
     }
 }

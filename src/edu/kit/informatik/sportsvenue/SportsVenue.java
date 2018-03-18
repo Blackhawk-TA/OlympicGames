@@ -1,6 +1,6 @@
 package edu.kit.informatik.sportsvenue;
 
-public class SportsVenue {
+class SportsVenue {
     private final String id;
     private final String country;
     private final String location;

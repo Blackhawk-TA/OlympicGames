@@ -1,6 +1,6 @@
 package edu.kit.informatik.sports;
 
-public class Discipline extends Sport {
+class Discipline extends Sport {
     private final String sport;
     private final String discipline;
 

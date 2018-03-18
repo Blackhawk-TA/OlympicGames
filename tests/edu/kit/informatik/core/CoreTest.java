@@ -6,7 +6,6 @@ import edu.kit.informatik.competition.CompetitionHandler;
 import edu.kit.informatik.competition.MedalTableHandler;
 import edu.kit.informatik.ioc.IocHandler;
 import edu.kit.informatik.sports.SportHandler;
-import edu.kit.informatik.sportsvenue.SportsVenue;
 import edu.kit.informatik.sportsvenue.SportsVenueHandler;
 import org.junit.After;
 import org.junit.Before;
@@ -69,7 +68,7 @@ public class CoreTest {
         assertEquals("IOC", "Error, no IOC codes registered yet.", iocHandler.listIOC());
         assertEquals("Athlete", "Error, no athletes registered yet.", athleteHandler.summaryAthletes("winter", "ski"));
 
-        //assertTrue("Sports empty", sportHandler.listSports().isEmpty());
+        assertTrue("Sports empty", sportHandler.listSports().isEmpty());
         assertTrue("SportVenues empty", sportsVenueHandler.getSportsVenues().isEmpty());
         assertTrue("IOCList empty", iocHandler.getIocList().isEmpty());
         assertTrue("Athletes empty", athleteHandler.getAthletes().isEmpty());
