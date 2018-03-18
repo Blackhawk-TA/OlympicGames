@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AthleteHandler {
-    private final List<Athlete> athletes = new ArrayList<>();
+    private List<Athlete> athletes = new ArrayList<>();
 
     /**
      * Add an athlete to the system
@@ -78,5 +78,12 @@ public class AthleteHandler {
      */
     public List<Athlete> getAthletes() {
         return athletes;
+    }
+
+    /**
+     * Reset the list
+     */
+    public void reset() {
+        athletes = new ArrayList<>();
     }
 }

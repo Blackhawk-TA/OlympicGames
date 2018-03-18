@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedalTableHandler {
-    private final List<MedalTable> medalTable = new ArrayList<>();
+    private List<MedalTable> medalTable = new ArrayList<>();
 
     /**
      * Creates a list for al competitions showing all won medals by each country
@@ -40,13 +40,13 @@ public class MedalTableHandler {
                     if (o1.getBronze().equals(o2.getBronze())) {
                         return o1.getIocId().compareTo(o2.getIocId());
                     } else {
-                        return o1.getBronze().compareTo(o2.getBronze());
+                        return o2.getBronze().compareTo(o1.getBronze());
                     }
                 } else {
-                    return o1.getSilver().compareTo(o2.getSilver());
+                    return o2.getSilver().compareTo(o1.getSilver());
                 }
             else {
-                return o1.getGold().compareTo(o2.getGold());
+                return o2.getGold().compareTo(o1.getGold());
             }
         });
 
@@ -66,5 +66,13 @@ public class MedalTableHandler {
             output.append("Error, no competitions to create a medal table registered yet.");
 
         return output.toString();
+    }
+
+
+    /**
+     * Reset the list
+     */
+    public void reset() {
+        medalTable = new ArrayList<>();
     }
 }

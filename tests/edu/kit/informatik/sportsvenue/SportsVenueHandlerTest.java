@@ -48,10 +48,16 @@ public class SportsVenueHandlerTest {
     public void listSportVenues() {
         String ex = "(1 004 loc4 500)\n(2 005 loc5 500)\n(3 001 loc1 2000)";
         String out = handler.listSportVenues("country1");
+        handler.addSportsVenue("002", "country2", "loc2", "name2", 2010, 1000);
         handler.addSportsVenue("001", "country1", "loc9", "name9", 2001, 2000);
         handler.addSportsVenue("004", "country1", "loc8", "name8", 1993, 2500);
 
         System.out.println("\nSorted Sport Venues:\n" + out);
         assertEquals("Sorted", ex, out);
+    }
+
+    @Test
+    public void listSportVenuesEmpty() {
+        assertEquals("Empty", "Error, no sport venues registered yet.", handler.listSportVenues(""));
     }
 }

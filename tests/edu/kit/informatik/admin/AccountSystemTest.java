@@ -1,6 +1,5 @@
 package edu.kit.informatik.admin;
 
-import edu.kit.informatik.core.Core;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +11,6 @@ public class AccountSystemTest {
 
     @Before
     public void setUp() {
-        Core.init(true);
-
         system = new AccountSystem();
         system.addAccount("firstName1", "lastName1", "user1", "password1");
         system.addAccount("firstName2", "lastName2", "user2", "password2");

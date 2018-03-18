@@ -41,8 +41,8 @@ public class AthleteHandlerTest {
     public void addAthlete() {
         String ex = "Error, this athlete already exists.";
         assertEquals("Failed", ex, handler.addAthlete("0002", "name2", "name2", "USA", "winter", "bob"));
-        assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "POL", "ball", "basketball"));
-        assertEquals("Success", ex, handler.addAthlete("0005", "name5", "dsa", "RUS", "winter", "basketball"));
+        assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "RUS", "ball", "basketball"));
+        assertEquals("Success", ex, handler.addAthlete("0005", "name5", "name5", "RUS", "winter", "basketball"));
     }
 
     @Test
@@ -56,5 +56,7 @@ public class AthleteHandlerTest {
         String out = handler.summaryAthletes("winter", "ski");
         System.out.println("\nList Athletes:\n" + out);
         assertEquals("Sorted", ex, out);
+
+        assertEquals("No list", "Error, no athletes registered yet.", handler.summaryAthletes("test", "test"));
     }
 }

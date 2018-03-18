@@ -27,14 +27,6 @@ class Sport {
     }
 
     /**
-     * Get the list of sports
-     * @return The list of sports
-     */
-    List<String> getSports() {
-        return sports;
-    }
-
-    /**
      * Get the index of the item where the requested sport is located
      * @param sport The discipline to search for
      * @return The sport if found, else -1

@@ -37,6 +37,13 @@ public class Core {
      * Resets the data in the system except admin accounts
      */
     public static void reset() {
+        athleteHandler.reset();
+        iocHandler.reset();
+        sportHandler.reset();
+        sportsVenueHandler.reset();
+        competitionHandler.reset();
+        medalTableHandler.reset();
+
         athleteHandler = null;
         iocHandler = null;
         sportHandler = null;

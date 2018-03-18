@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SportHandler {
-    private final List<Discipline> disciplines = new ArrayList<>();
+    private List<Discipline> disciplines = new ArrayList<>();
 
     /**
      * Adds a discipline and sport if one of them doesn't exist yet
@@ -62,10 +62,9 @@ public class SportHandler {
     }
 
     /**
-     * Get the discipline list
-     * @return The discipline list
+     * Reset the list
      */
-    public List<Discipline> getDisciplines() {
-        return disciplines;
+    public void reset() {
+        disciplines = new ArrayList<>();
     }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SportsVenueHandler {
-    private final List<SportsVenue> sportsVenues = new ArrayList<>();
+    private List<SportsVenue> sportsVenues = new ArrayList<>();
 
     /**
      * Add a sports venue
@@ -36,7 +36,7 @@ public class SportsVenueHandler {
      * @param country The country
      * @return A list of sport venues of the requested country
      */
-    public String listSportVenues(String country) { //TODO add sorting
+    public String listSportVenues(String country) {
         sportsVenues.sort((SportsVenue o1, SportsVenue o2) -> {
             if (o1.getSeats().equals(o2.getSeats()))
                 return o1.getId().compareTo(o2.getId());
@@ -85,6 +85,13 @@ public class SportsVenueHandler {
      */
     public List<SportsVenue> getSportsVenues() {
         return sportsVenues;
+    }
+
+    /**
+     * Reset the list
+     */
+    public void reset() {
+        sportsVenues = new ArrayList<>();
     }
 
     /**

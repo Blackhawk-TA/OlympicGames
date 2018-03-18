@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IocHandler {
-    private final List<Ioc> iocList = new ArrayList<>();
+    private List<Ioc> iocList = new ArrayList<>();
 
     /**
      * Add an ioc for a country
@@ -99,4 +99,12 @@ public class IocHandler {
     public List<Ioc> getIocList() {
         return iocList;
     }
+
+    /**
+     * Reset the list
+     */
+    public void reset() {
+        iocList = new ArrayList<>();
+    }
+
 }

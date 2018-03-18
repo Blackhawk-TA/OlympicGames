@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompetitionHandler {
-    private final List<Competition> competitions = new ArrayList<>();
+    private List<Competition> competitions = new ArrayList<>();
 
     /**
      * Add a new competition to an athlete
@@ -24,7 +24,7 @@ public class CompetitionHandler {
     public String addCompetition(String id, int year, String country, String sport, String discipline,
                                  int gold, int silver, int bronze) {
         if (medalsValid(gold, silver, bronze) && yearValid(year) && isValid(id, country, sport, discipline)) {
-            if (winValid(id, discipline, gold, silver, bronze)) {
+            if (winValid(id, discipline, year)) {
                 addMedal(id, gold, silver, bronze);
                 competitions.add(new Competition(id, year, country, sport, discipline, gold, silver, bronze));
                 return "OK";
@@ -49,7 +49,14 @@ public class CompetitionHandler {
     public List<Competition> getCompetitions() {
         return competitions;
     }
-    
+
+    /**
+     * Reset the list
+     */
+    public void reset() {
+        competitions = new ArrayList<>();
+    }
+
     private void addMedal(String id, int gold, int silver, int bronze) {
         for (Athlete athlete: Core.getAthleteHandler().getAthletes()) {
             if (athlete.getId().equals(id) && gold + silver + bronze == 1) {
@@ -59,17 +66,14 @@ public class CompetitionHandler {
     }
 
     //Check if athlete has won only one medal in a discipline
-    private boolean winValid(String id, String discipline, int gold, int silver, int bronze) {
+    private boolean winValid(String id, String discipline, int year) {
         for (Competition competition: competitions) {
-            if (competition.getId().equals(id) && competition.getDiscipline().equals(discipline)) {
-                //Either no medals won, or no medal was won in this discipline by this athlete so far
-                return  (gold == 0 && silver == 0 && bronze == 0)
-                        ^ (competition.getGold() == 0 && gold == 1)
-                        ^ (competition.getSilver() == 0 && silver == 1)
-                        ^ (competition.getBronze() == 0 && bronze == 1);
-            }
+            if ((competition.getId().equals(id) && competition.getDiscipline().equals(discipline) //Same athlete
+                    && competition.getYear() == year)) { //Older entry with same year and athlete{
+               return false;
+           }
         }
-        return false;
+        return true;
     }
 
     //Check if athlete is valid
