@@ -25,6 +25,7 @@ public class CompetitionHandler {
                                  int gold, int silver, int bronze) {
         if (medalsValid(gold, silver, bronze) && yearValid(year) && isValid(id, country, sport, discipline)) {
             if (winValid(id, discipline, gold, silver, bronze)) {
+                addMedal(id, gold, silver, bronze);
                 competitions.add(new Competition(id, year, country, sport, discipline, gold, silver, bronze));
                 return "OK";
             } else {
@@ -48,6 +49,14 @@ public class CompetitionHandler {
     public List<Competition> getCompetitions() {
         return competitions;
     }
+    
+    private void addMedal(String id, int gold, int silver, int bronze) {
+        for (Athlete athlete: Core.getAthleteHandler().getAthletes()) {
+            if (athlete.getId().equals(id) && gold + silver + bronze == 1) {
+                athlete.addMedal();
+            }
+        }
+    }
 
     //Check if athlete has won only one medal in a discipline
     private boolean winValid(String id, String discipline, int gold, int silver, int bronze) {
@@ -55,9 +64,9 @@ public class CompetitionHandler {
             if (competition.getId().equals(id) && competition.getDiscipline().equals(discipline)) {
                 //Either no medals won, or no medal was won in this discipline by this athlete so far
                 return  (gold == 0 && silver == 0 && bronze == 0)
-                        || (competition.getGold() == 0 && gold == 1)
-                        || (competition.getSilver() == 0 && silver == 1)
-                        || (competition.getBronze() == 0 && bronze == 1);
+                        ^ (competition.getGold() == 0 && gold == 1)
+                        ^ (competition.getSilver() == 0 && silver == 1)
+                        ^ (competition.getBronze() == 0 && bronze == 1);
             }
         }
         return false;

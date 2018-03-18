@@ -1,5 +1,8 @@
 package edu.kit.informatik.athletes;
 
+import edu.kit.informatik.competition.Competition;
+import edu.kit.informatik.core.Core;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class AthleteHandler {
         for (Athlete item: athletes) {
             if (item.getSport().equals(sport) && item.getDiscipline().equals(discipline)) {
                 output.append(String.format(
-                        "%s %s %s %s\n", item.getId(), item.getFirstName(), item.getLastName(), item.getMedals())); //TODO calc medals
+                        "%s %s %s %s\n", item.getId(), item.getFirstName(), item.getLastName(), getMedals(item)));
             }
         }
 
@@ -52,6 +55,20 @@ public class AthleteHandler {
             output.setLength(output.length() - 1); //Remove last linebreak
 
         return output.toString();
+    }
+
+    private int getMedals(Athlete athlete) {
+        List<Competition> competitions = Core.getCompetitionHandler().getCompetitions();
+        int medals = 0;
+
+        for (Competition competition: competitions) {
+            if (competition.getId().equals(athlete.getId())) {
+                if (competition.getGold() == 1 ^ competition.getSilver() == 1 ^ competition.getBronze() == 1) {
+                    medals++;
+                }
+            }
+        }
+        return medals;
     }
 
     /**

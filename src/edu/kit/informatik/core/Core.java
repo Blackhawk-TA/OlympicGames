@@ -2,30 +2,46 @@ package edu.kit.informatik.core;
 
 import edu.kit.informatik.admin.AccountSystem;
 import edu.kit.informatik.athletes.*;
-import edu.kit.informatik.competition.Competition;
 import edu.kit.informatik.competition.CompetitionHandler;
 import edu.kit.informatik.ioc.*;
 import edu.kit.informatik.competition.MedalTableHandler;
 import edu.kit.informatik.sports.*;
 import edu.kit.informatik.sportsvenue.*;
 
-import java.util.List;
-
 public class Core {
-    private static final AccountSystem ACCOUNT_SYSTEM = new AccountSystem();
-    private static final AthleteHandler ATHLETE_HANDLER = new AthleteHandler();
-    private static final IocHandler IOC_HANDLER = new IocHandler();
-    private static final SportHandler SPORT_HANDLER = new SportHandler();
-    private static final SportsVenueHandler SPORTS_VENUE_HANDLER = new SportsVenueHandler();
-    private static final CompetitionHandler COMPETITION_HANDLER = new CompetitionHandler();
-    private static final MedalTableHandler MEDAL_TABLE_HANDLER = new MedalTableHandler();
+    private static AccountSystem accountSystem = new AccountSystem();
+    private static AthleteHandler athleteHandler = new AthleteHandler();
+    private static IocHandler iocHandler = new IocHandler();
+    private static SportHandler sportHandler = new SportHandler();
+    private static SportsVenueHandler sportsVenueHandler = new SportsVenueHandler();
+    private static CompetitionHandler competitionHandler = new CompetitionHandler();
+    private static MedalTableHandler medalTableHandler = new MedalTableHandler();
+
+    /**
+     * Resets the data in the system except admin accounts
+     */
+    public static void reset() {
+        athleteHandler = null;
+        iocHandler = null;
+        sportHandler = null;
+        sportsVenueHandler = null;
+        competitionHandler = null;
+        medalTableHandler = null;
+
+        athleteHandler = new AthleteHandler();
+        iocHandler = new IocHandler();
+        sportHandler = new SportHandler();
+        sportsVenueHandler = new SportsVenueHandler();
+        competitionHandler = new CompetitionHandler();
+        medalTableHandler = new MedalTableHandler();
+    }
 
     /**
      * Get the Account System
      * @return The Account System
      */
     public static AccountSystem getSystem() {
-        return ACCOUNT_SYSTEM;
+        return accountSystem;
     }
 
     /**
@@ -33,7 +49,7 @@ public class Core {
      * @return The athlete handler
      */
     public static AthleteHandler getAthleteHandler() {
-        return ATHLETE_HANDLER;
+        return athleteHandler;
     }
 
     /**
@@ -41,7 +57,7 @@ public class Core {
      * @return The IOC handler
      */
     public static IocHandler getIocHandler() {
-        return IOC_HANDLER;
+        return iocHandler;
     }
 
     /**
@@ -49,7 +65,7 @@ public class Core {
      * @return The sport handler
      */
     public static SportHandler getSportHandler() {
-        return SPORT_HANDLER;
+        return sportHandler;
     }
 
     /**
@@ -57,46 +73,22 @@ public class Core {
      * @return The sport venue handler
      */
     public static SportsVenueHandler getVenueHandler() {
-        return SPORTS_VENUE_HANDLER;
+        return sportsVenueHandler;
     }
 
     /**
-     * Get the athlete list
-     * @return The athlete list
+     * Get the competition handler
+     * @return The competition handler
      */
-    public static List<Athlete> getAthleteList() {
-        return ATHLETE_HANDLER.getAthletes();
+    public static CompetitionHandler getCompetitionHandler() {
+        return competitionHandler;
     }
 
     /**
-     * Get the IOC list
-     * @return The IOC list
+     * Get the medal table handle
+     * @return The medal table handler
      */
-    public static List<Ioc> getIocList() {
-        return IOC_HANDLER.getIocList();
-    }
-
-    /**
-     * Get the disciplines list
-     * @return The disciplines list
-     */
-    public static List<Discipline> getDisciplines() {
-        return SPORT_HANDLER.getDisciplines();
-    }
-
-    /**
-     * Get the sport venues list
-     * @return The sport venues list
-     */
-    public static List<SportsVenue> getSportsVenues() {
-        return SPORTS_VENUE_HANDLER.getSportsVenues();
-    }
-
-    /**
-     * Get a list of all competitions
-     * @return The list of competitions
-     */
-    public static List<Competition> getCompetitions() {
-        return COMPETITION_HANDLER.getCompetitions();
+    public static MedalTableHandler getMedalTableHandler() {
+        return medalTableHandler;
     }
 }

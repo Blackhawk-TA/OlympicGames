@@ -37,7 +37,7 @@ public class Competition {
      * Get the id of the competition
      * @return The id
      */
-    String getId() {
+    public String getId() {
         return id;
     }
 
@@ -77,7 +77,7 @@ public class Competition {
      * Get the amount of gold medals of the athlete
      * @return The amount of gold medals
      */
-    int getGold() {
+    public int getGold() {
         return gold;
     }
 
@@ -85,7 +85,7 @@ public class Competition {
      * Get the amount of silver medals of the athlete
      * @return The amount of silver medals
      */
-    int getSilver() {
+    public int getSilver() {
         return silver;
     }
 
@@ -93,7 +93,7 @@ public class Competition {
      * Get the amount of bronze medals of the athlete
      * @return The amount of bronze medals
      */
-    int getBronze() {
+    public int getBronze() {
         return bronze;
     }
 }

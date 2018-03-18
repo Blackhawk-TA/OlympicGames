@@ -90,7 +90,7 @@ public class SportsVenueHandler {
      * @return The to the country referring IOC
      */
     private boolean iocExists(String country) {
-        for (Ioc item: Core.getIocList()) {
+        for (Ioc item: Core.getIocHandler().getIocList()) {
             if (item.getCountry().equals(country)) {
                 return true;
             }

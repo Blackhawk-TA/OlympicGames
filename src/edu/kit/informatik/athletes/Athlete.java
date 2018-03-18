@@ -86,9 +86,8 @@ public class Athlete {
 
     /**
      * Add a medal to the athlete
-     * @param amount Amount of medals to add
      */
-    void addMedals(int amount) {
-        medals += amount;
+    public void addMedal() {
+        medals++;
     }
 }

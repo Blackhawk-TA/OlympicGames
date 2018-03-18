@@ -49,7 +49,7 @@ public class SportsVenueHandlerTest {
         handler.addSportsVenue(1, "country1", "loc9", "name9", 2001, 2000);
         handler.addSportsVenue(4, "country1", "loc8", "name8", 1993, 2500);
 
-        System.out.println("Sorted Sport Venues:\n" + out);
+        System.out.println("\nSorted Sport Venues:\n" + out);
         assertEquals("Sorted", ex, out);
     }
 }

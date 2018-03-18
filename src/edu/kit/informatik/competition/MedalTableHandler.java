@@ -14,8 +14,8 @@ public class MedalTableHandler {
      * @return The medal list
      */
     public String listMedals() {
-        List<Ioc> iocList = Core.getIocList();
-        List<Competition> competitions = Core.getCompetitions();
+        List<Ioc> iocList = Core.getIocHandler().getIocList();
+        List<Competition> competitions = Core.getCompetitionHandler().getCompetitions();
 
         for (Ioc ioc: iocList) {
             int gold = 0;
