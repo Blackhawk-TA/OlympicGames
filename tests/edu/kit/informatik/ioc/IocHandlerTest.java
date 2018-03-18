@@ -30,7 +30,9 @@ public class IocHandlerTest {
         String ex = "Error, this IOC already exists.";
         assertEquals("Failed", ex, handler.addIOC("002", "CTR2", "country2", 1995));
         assertEquals("Success", "OK", handler.addIOC("004", "CTR4", "country4", 2000));
-        assertEquals("Failed", ex, handler.addIOC("004", "CTR4", "country4", 2000));
+        assertEquals("Failed", ex, handler.addIOC("004", "CTR4", "country6", 2000));
+        assertEquals("Failed", ex, handler.addIOC("005", "CTR5", "country4", 1995));
+        assertEquals("Failed", ex, handler.addIOC("004", "CTR6", "country6", 1990));
     }
 
     @Test

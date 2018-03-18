@@ -5,7 +5,7 @@ import java.util.List;
 
 class Sport {
     private final String name;
-    private final List<String> sports = new ArrayList<>();
+    private List<String> sports = new ArrayList<>();
 
     /**
      * Constructor for the sport
@@ -24,6 +24,21 @@ class Sport {
      */
     String getName() {
         return name;
+    }
+
+    /**
+     * Get the list of sports
+     * @return The list of sports
+     */
+    List<String> getSports() {
+        return sports;
+    }
+
+    /**
+     * Reset list
+     */
+    void reset() {
+        sports = new ArrayList<>();
     }
 
     /**

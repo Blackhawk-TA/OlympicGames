@@ -15,7 +15,7 @@ public class IocHandler {
      * @return String containing "OK" if successful and error message if not
      */
     public String addIOC(String id, String code, String country, Integer year) {
-        if (getIndex(code) == -1 && getIdIndex(id) == -1 && getCountryIndex(country) == -1) {
+        if (getIndex(code) == -1 && !idExists(id) && !countyExists(country)) {
             iocList.add(new Ioc(id, code, country, year));
             return "OK";
         } else {
@@ -51,31 +51,31 @@ public class IocHandler {
     }
 
     /**
-     * Get the index of the item where the requested id is located
+     * Check if id exists
      * @param id The id to search for
-     * @return The index of the id if found, else -1
+     * @return True if it exists
      */
-    private int getIdIndex(String id) {
-        for (int i = 0; i < iocList.size(); i++) {
-            if (iocList.get(i).getId().equals(id)) {
-                return i;
+    private boolean idExists(String id) {
+        for (Ioc ioc: iocList) {
+            if (ioc.getId().equals(id)) {
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 
     /**
-     * Get the index of the item where the requested country is located
+     * Check if country exists
      * @param country The country to search for
-     * @return The index of the country if found, else -1
+     * @return True if it exists
      */
-    private int getCountryIndex(String country) {
-        for (int i = 0; i < iocList.size(); i++) {
-            if (iocList.get(i).getCountry().equals(country)) {
-                return i;
+    private boolean countyExists(String country) {
+        for (Ioc ioc: iocList) {
+            if (ioc.getCountry().equals(country)) {
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 
     /**

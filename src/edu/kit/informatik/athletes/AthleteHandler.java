@@ -1,5 +1,8 @@
 package edu.kit.informatik.athletes;
 
+import edu.kit.informatik.core.Core;
+import edu.kit.informatik.ioc.Ioc;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +21,11 @@ public class AthleteHandler {
      */
     public String addAthlete(String id, String firstName, String lastName, String country,
                              String sport, String discipline) {
-        if (getIndex(id) == -1) {
+        if (idNotUsed(id) && iocExists(country)) {
             athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
             return "OK";
+        } else if (!iocExists(country) && idNotUsed(id)) {
+            return "Error, this country isn't registered in the IOC list.";
         } else {
             return "Error, this athlete already exists.";
         }
@@ -37,7 +42,7 @@ public class AthleteHandler {
             if (o1.getMedals().equals(o2.getMedals()))
                 return o1.getId().compareTo(o2.getId());
             else
-                return o1.getMedals().compareTo(o2.getMedals());
+                return o2.getMedals().compareTo(o1.getMedals());
         });
 
         StringBuilder output = new StringBuilder();
@@ -63,13 +68,27 @@ public class AthleteHandler {
      * @param id The id to search for
      * @return The id if found, else -1
      */
-    private int getIndex(String id) {
-        for (int i = 0; i < athletes.size(); i++) {
-            if (athletes.get(i).getId().equals(id)) {
-                return i;
+    private boolean idNotUsed(String id) {
+        for (Athlete athlete: athletes) {
+            if (athlete.getId().equals(id)) {
+                return false;
             }
         }
-        return -1;
+        return true;
+    }
+
+    /**
+     * Get the IOC of a country
+     * @param country The country the IOC is searched for
+     * @return The to the country referring IOC
+     */
+    private boolean iocExists(String country) {
+        for (Ioc item: Core.getIocHandler().getIocList()) {
+            if (item.getCountry().equals(country)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
