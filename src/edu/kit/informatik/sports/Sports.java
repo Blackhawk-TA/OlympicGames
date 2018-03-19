@@ -3,7 +3,7 @@ package edu.kit.informatik.sports;
 import java.util.ArrayList;
 import java.util.List;
 
-class Sports {
+public class Sports {
     private final String sport;
     private List<String> disciplines = new ArrayList<>();
 
@@ -21,7 +21,7 @@ class Sports {
      * Get the sport name
      * @return The sport name
      */
-    String getSport() {
+    public String getSport() {
         return sport;
     }
 
@@ -29,7 +29,7 @@ class Sports {
      * Get the list of disciplines of the sport
      * @return The list of disciplines
      */
-    List<String> getDisciplines() {
+    public List<String> getDisciplines() {
         return disciplines;
     }
 

@@ -3,6 +3,7 @@ package edu.kit.informatik.competition;
 import edu.kit.informatik.athletes.AthleteHandler;
 import edu.kit.informatik.core.Core;
 import edu.kit.informatik.ioc.IocHandler;
+import edu.kit.informatik.sports.SportHandler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import static org.junit.Assert.*;
 
 public class CompetitionHandlerTest {
     private CompetitionHandler handler;
+    private SportHandler sportHandler;
     private AthleteHandler athleteHandler;
     private IocHandler iocHandler;
 
@@ -18,6 +20,11 @@ public class CompetitionHandlerTest {
     public void setUp() {
         Core.init(true);
         handler = Core.getCompetitionHandler();
+
+        sportHandler = Core.getSportHandler();
+        sportHandler.addDiscipline("winter", "ski");
+        sportHandler.addDiscipline("ball", "soccer");
+        sportHandler.addDiscipline("winter", "bob");
 
         iocHandler = Core.getIocHandler();
         iocHandler.addIOC("001", "GER", "Germany", 1990);
@@ -32,6 +39,7 @@ public class CompetitionHandlerTest {
 
     @After
     public void tearDown() {
+        sportHandler = null;
         iocHandler = null;
         athleteHandler = null;
         handler = null;

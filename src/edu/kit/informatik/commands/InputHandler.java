@@ -68,13 +68,13 @@ public class InputHandler {
             } else {
                 Terminal.printError("invalid input parameters.");
             }
-        } else if (arg.matches("list-sports-venue") && REG_CMD.hasParam(groups, 0)) {
+        } else if (arg.matches("list-sports-venues") && REG_CMD.hasParam(groups, 1)) {
             Terminal.printLine(Core.getVenueHandler().listSportVenues(REG_CMD.getParam(groups, 0)));
         } else if (arg.matches("add-olympic-sport") && REG_CMD.hasParam(groups, 2)) {
             Terminal.printLine(Core.getSportHandler().addDiscipline(
                     REG_CMD.getParam(groups, 0),
                     REG_CMD.getParam(groups, 1)));
-        } else if (arg.matches("list-olympic-sport") && REG_CMD.hasParam(groups, 0)) {
+        } else if (arg.matches("list-olympic-sports") && REG_CMD.hasParam(groups, 0)) {
             Terminal.printLine(Core.getSportHandler().listSports());
         } else if (arg.matches("add-ioc-code") && REG_CMD.hasParam(groups, 4)) {
             int param0 = REG_CMD.getNum(REG_CMD.getParam(groups, 0));

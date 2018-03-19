@@ -2,6 +2,7 @@ package edu.kit.informatik.athletes;
 
 import edu.kit.informatik.core.Core;
 import edu.kit.informatik.ioc.Ioc;
+import edu.kit.informatik.sports.Sports;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,13 @@ public class AthleteHandler {
      */
     public String addAthlete(String id, String firstName, String lastName, String country,
                              String sport, String discipline) {
-        if (idNotUsed(id) && iocExists(country)) {
+        if (idNotUsed(id) && iocExists(country) && sportExists(sport, discipline)) {
             athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
             return "OK";
-        } else if (!iocExists(country) && idNotUsed(id)) {
+        } else if (!iocExists(country) && idNotUsed(id) && sportExists(sport, discipline)) {
             return "Error, this country isn't registered in the IOC list.";
+        }  else if (idNotUsed(id) && !sportExists(sport, discipline)) {
+            return "Error, this sport is not registered yet.";
         } else {
             return "Error, this athlete already exists.";
         }
@@ -86,6 +89,19 @@ public class AthleteHandler {
         for (Ioc item: Core.getIocHandler().getIocList()) {
             if (item.getCountry().equals(country)) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean sportExists(String sport, String discipline) {
+        for (Sports sportItem: Core.getSportHandler().getSports()) {
+            if (sportItem.getSport().equals(sport)) {
+                for (String disciplineItem: sportItem.getDisciplines()) {
+                    if (disciplineItem.equals(discipline)) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
