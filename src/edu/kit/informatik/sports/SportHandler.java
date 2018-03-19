@@ -31,6 +31,14 @@ public class SportHandler {
     }
 
     /**
+     * Get the sports list
+     * @return The sports list
+     */
+    public List<Sports> getSports() {
+        return sports;
+    }
+
+    /**
      * Creates a list of all sports and disciplines
      * @return The list of sports and disciplines
      */
@@ -72,7 +80,7 @@ public class SportHandler {
      * @param discipline The discipline to search for
      * @return True if it the combination exists false if not
      */
-    private boolean notExisting(String sport, String discipline) { //TODO test 1 discipline 2 sports
+    private boolean notExisting(String sport, String discipline) {
         for (Sports sportItem: sports) {
             if (sportItem.getSport().equals(sport)) {
                 for (String disciplineItem : sportItem.getDisciplines()) {

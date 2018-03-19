@@ -88,7 +88,6 @@ class RegexHandler {
         if (!groupItem.isEmpty()) {
             //On first param, remove space in front of it if necessary
             if (index == 0 & groupItem.startsWith(" ")) {
-                System.out.println(groupItem);
                 groupItem = groupItem.substring(1);
             }
             return groupItem;

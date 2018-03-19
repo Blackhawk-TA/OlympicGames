@@ -51,7 +51,7 @@ public class AthleteHandlerTest {
     }
 
     @Test
-    public void summaryAthletes() { //TODO test medals
+    public void summaryAthletes() {
         String ex = "0001 name1 name1 3\n0004 name4 name4 2\n0006 name6 name6 2\n0005 name5 name5 1";
 
         handler.addAthlete("0004", "name4", "name4", "USA", "winter", "ski");

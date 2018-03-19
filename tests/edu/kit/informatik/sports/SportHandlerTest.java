@@ -19,6 +19,7 @@ public class SportHandlerTest {
         handler.addDiscipline("ball", "baseball");
         handler.addDiscipline("ball", "soccer");
         handler.addDiscipline("ball", "basketball");
+        handler.addDiscipline("indoor", "basketball");
         handler.addDiscipline("winter", "ski");
         handler.addDiscipline("winter", "biathlon");
     }
@@ -33,12 +34,13 @@ public class SportHandlerTest {
         String ex = "Error, discipline already exists.";
         assertEquals("Failed", ex, handler.addDiscipline("winter", "biathlon"));
         assertEquals("Success", "OK", handler.addDiscipline("winter", "ice hockey"));
+        assertEquals("Success", "OK", handler.addDiscipline("indoor", "ice hockey"));
         assertEquals("Failed", ex, handler.addDiscipline("winter", "ice hockey"));
     }
 
     @Test
     public void listSports() {
-        String ex = "ball baseball\nball basketball\nball football\nball soccer\nwinter biathlon\nwinter ski";
+        String ex = "ball baseball\nball basketball\nball football\nball soccer\nindoor basketball\nwinter biathlon\nwinter ski";
         String out = handler.listSports();
         System.out.println("\nList sports:\n" + out);
         assertEquals("Sorted", ex, out);
