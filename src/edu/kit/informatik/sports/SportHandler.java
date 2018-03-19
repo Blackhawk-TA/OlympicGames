@@ -1,10 +1,11 @@
 package edu.kit.informatik.sports;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SportHandler {
-    private List<Discipline> disciplines = new ArrayList<>();
+    private List<Sports> sports = new ArrayList<>();
 
     /**
      * Adds a discipline and sport if one of them doesn't exist yet
@@ -13,9 +14,17 @@ public class SportHandler {
      * @return String, OK if successful, else error message
      */
     public String addDiscipline(String sport, String discipline) {
-        if (getIndex(discipline) == -1) {
-            disciplines.add(new Discipline(sport, discipline));
+        if (notExisting(sport, discipline) && !sportExisting(sport)) {
+            sports.add(new Sports(sport, discipline));
             return "OK";
+        } else if (notExisting(sport, discipline) && sportExisting(sport)) {
+            for (Sports sportItem: sports) {
+                if (sportItem.getSport().equals(sport)) {
+                    sportItem.addDisciplineToSport(discipline);
+                    return "OK";
+                }
+            }
+            return "Error, could not create discipline.";
         } else {
             return "Error, discipline already exists.";
         }
@@ -26,16 +35,17 @@ public class SportHandler {
      * @return The list of sports and disciplines
      */
     public String listSports() {
-        disciplines.sort((Discipline o1, Discipline o2) -> {
-            if (o1.getSport().equals(o2.getSport()))
-                return o1.getDiscipline().compareTo(o2.getDiscipline());
-            else
-                return o1.getSport().compareTo(o2.getSport());
-        });
+        Comparator.comparing(Sports::getSport);
+
+        for (Sports sport: sports) {
+            sport.getDisciplines().sort(String::compareTo);
+        }
 
         StringBuilder output = new StringBuilder();
-        for (Discipline item: disciplines) {
-            output.append(String.format("%s %s\n", item.getSport(), item.getDiscipline()));
+        for (Sports sport: sports) {
+            for (String discipline: sport.getDisciplines()) {
+                output.append(String.format("%s %s\n", sport.getSport(), discipline));
+            }
         }
 
         if (output.length() >= 1)
@@ -47,24 +57,41 @@ public class SportHandler {
         return output.toString();
     }
 
-    /**
-     * Get the index of the item where the requested discipline is located
-     * @param discipline The discipline to search for
-     * @return The discipline if found, else -1
-     */
-    private int getIndex(String discipline) {
-        for (int i = 0; i < disciplines.size(); i++) {
-            if (disciplines.get(i).getDiscipline().equals(discipline)) {
-                return i;
+    private boolean sportExisting(String sport) {
+        for (Sports sportItem: sports) {
+            if (sportItem.getSport().equals(sport)) {
+                return true;
             }
         }
-        return -1;
+        return false;
+    }
+
+    /**
+     * Check if sport and discipline combination exists
+     * @param sport The sport to search for
+     * @param discipline The discipline to search for
+     * @return True if it the combination exists false if not
+     */
+    private boolean notExisting(String sport, String discipline) { //TODO test 1 discipline 2 sports
+        for (Sports sportItem: sports) {
+            if (sportItem.getSport().equals(sport)) {
+                for (String disciplineItem : sportItem.getDisciplines()) {
+                    if (disciplineItem.equals(discipline)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
      * Reset the list
      */
     public void reset() {
-        disciplines = new ArrayList<>();
+        for (Sports sport: sports) {
+            sport.resetDiscipline();
+        }
+        sports = new ArrayList<>();
     }
 }
