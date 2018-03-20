@@ -47,7 +47,6 @@ public class InputHandler {
     private static void inputsLogin(String arg, String[] groups) {
         if (arg.matches("quit") && REG_CMD.hasParam(groups, 0)) {
             running = false;
-            Terminal.printLine("OK");
         } else if (arg.matches("reset") && REG_CMD.hasParam(groups, 0)) {
             Core.reset();
             Terminal.printLine("OK");

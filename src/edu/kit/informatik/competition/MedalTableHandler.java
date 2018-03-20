@@ -55,7 +55,7 @@ public class MedalTableHandler {
 
         for (MedalTable item: medalTable) {
             index++;
-            output.append(String.format("(%d %s %s %s %d %d %d %d)\n", index, item.getIocId(), item.getIoc(),
+            output.append(String.format("(%d,%s,%s,%s,%d,%d,%d,%d)\n", index, item.getIocId(), item.getIoc(),
                     item.getCountry(), item.getGold(), item.getSilver(), item.getBronze(), item.getMedals()));
         }
 
