@@ -92,9 +92,9 @@ public class SportsVenueHandler {
     }
 
     /**
-     * Get the IOC of a country
-     * @param country The country the IOC is searched for
-     * @return The to the country referring IOC
+     * Check if IOC exists
+     * @param country The country the IOC should exist for
+     * @return True if it exists
      */
     private boolean iocExists(String country) {
         for (Ioc item: Core.getIocHandler().getIocList()) {
