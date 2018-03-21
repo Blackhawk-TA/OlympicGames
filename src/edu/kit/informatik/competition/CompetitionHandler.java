@@ -2,6 +2,7 @@ package edu.kit.informatik.competition;
 
 import edu.kit.informatik.athletes.Athlete;
 import edu.kit.informatik.core.Core;
+import edu.kit.informatik.ioc.Ioc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +24,22 @@ public class CompetitionHandler {
      */
     public String addCompetition(String id, int year, String country, String sport, String discipline,
                                  int gold, int silver, int bronze) {
-        if (medalsValid(gold, silver, bronze) && yearValid(year) && isValid(id, country, sport, discipline)) {
-            if (winValid(id, discipline, year)) {
+        if (medalsValid(gold, silver, bronze) && yearValid(year, country) && isValid(id, country, sport, discipline)) {
+            if (winValid(id, sport, discipline, year)) {
                 addMedal(id, gold, silver, bronze);
                 competitions.add(new Competition(id, year, country, sport, discipline, gold, silver, bronze));
                 return "OK";
             } else {
-                return "Error, an athlete can only win one medal per discipline.";
+                return "Error, an athlete can only take part once a year.";
             }
-        } else if (!medalsValid(gold, silver, bronze) && yearValid(year) && isValid(id, country, sport, discipline)) {
+        } else if (!medalsValid(gold, silver, bronze) && yearValid(year, country)
+                && isValid(id, country, sport, discipline)) {
             return "Error, the athlete can't have won the medals you entered.";
-        } else if (medalsValid(gold, silver, bronze) && !yearValid(year) && isValid(id, country, sport, discipline)) {
-            return "Error, the year is invalid, try a 1926-2018.";
-        } else if (medalsValid(gold, silver, bronze) && yearValid(year) && !isValid(id, country, sport, discipline)) {
+        } else if (medalsValid(gold, silver, bronze) && !yearValid(year, country)
+                && isValid(id, country, sport, discipline)) {
+            return "Error, the year is invalid.";
+        } else if (medalsValid(gold, silver, bronze) && yearValid(year, country)
+                && !isValid(id, country, sport, discipline)) {
             return "Error, the athlete does not exist.";
         } else {
             return "Error, invalid input. Please check your parameters.";
@@ -66,10 +70,10 @@ public class CompetitionHandler {
     }
 
     //Check if athlete has won only one medal in a discipline
-    private boolean winValid(String id, String discipline, int year) {
+    private boolean winValid(String id, String sport, String discipline, int year) {
         for (Competition competition: competitions) {
-            if ((competition.getId().equals(id) && competition.getDiscipline().equals(discipline) //Same athlete
-                    && competition.getYear() == year)) { //Older entry with same year and athlete{
+            if ((competition.getId().equals(id) && competition.getSport().equals(sport)
+                    && competition.getDiscipline().equals(discipline) && competition.getYear() == year)) {
                return false;
            }
         }
@@ -88,8 +92,15 @@ public class CompetitionHandler {
     }
 
     //Check if year is valid
-    private boolean yearValid(int year) {
-        return year >= 1926 && year <= 2018;
+    private boolean yearValid(int year, String country) {
+        if (year >= 1926 && year <= 2018) {
+            for (Ioc ioc: Core.getIocHandler().getIocList()) {
+                if (ioc.getCountry().equals(country) && ioc.getYear() <= year) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //Check if medals are valid

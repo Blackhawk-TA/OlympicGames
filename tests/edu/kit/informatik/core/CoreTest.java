@@ -11,7 +11,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CoreTest {
     private AccountSystem accountSystem;
@@ -62,11 +63,11 @@ public class CoreTest {
         Core.reset();
 
         assertEquals("Admin", "OK", accountSystem.login("admin", "password"));
-        assertEquals("Medals", "Error, no competitions to create a medal table registered yet.", handlerMedals.listMedals());
-        assertEquals("SportVenue", "Error, no sport venues registered yet.", sportsVenueHandler.listSportVenues("Germany"));
-        assertEquals("Sports", "Error, no sports registered yet.", sportHandler.listSports());
-        assertEquals("IOC", "Error, no IOC codes registered yet.", iocHandler.listIOC());
-        assertEquals("Athlete", "Error, no athletes registered yet.", athleteHandler.summaryAthletes("winter", "ski"));
+        assertEquals("Medals", "", handlerMedals.listMedals());
+        assertEquals("SportVenue", "", sportsVenueHandler.listSportVenues("Germany"));
+        assertEquals("Sports", "", sportHandler.listSports());
+        assertEquals("IOC", "", iocHandler.listIOC());
+        assertEquals("Athlete", "", athleteHandler.summaryAthletes("winter", "ski"));
 
         assertTrue("Sports empty", sportHandler.getSports().isEmpty());
         assertTrue("SportVenues empty", sportsVenueHandler.getSportsVenues().isEmpty());

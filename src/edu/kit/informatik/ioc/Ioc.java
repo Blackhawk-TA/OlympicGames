@@ -48,7 +48,7 @@ public class Ioc {
      * Get the year the ioc has been introduced
      * @return The year
      */
-    Integer getYear() {
+    public Integer getYear() {
         return year;
     }
 }

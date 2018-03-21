@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MedalTableHandlerTest {
     private MedalTableHandler handler;
@@ -31,7 +31,7 @@ public class MedalTableHandlerTest {
         iocHandler = Core.getIocHandler();
         iocHandler.addIOC("001", "GER", "Germany", 1990);
         iocHandler.addIOC("003", "FRA", "France", 1995);
-        iocHandler.addIOC("002", "USA", "USA", 1992);
+        iocHandler.addIOC("002", "USA", "USA", 1926);
 
         athleteHandler = Core.getAthleteHandler();
         athleteHandler.addAthlete("0001", "name1", "name1", "Germany", "winter", "ski");
@@ -57,7 +57,7 @@ public class MedalTableHandlerTest {
 
     @Test
     public void listMedalsSortedByGold() {
-        String ex = "(1 001 GER Germany 2 1 0 3)\n(2 002 USA USA 0 1 0 1)\n(3 003 FRA France 0 1 0 1)";
+        String ex = "(1,001,GER,Germany,2,1,0,3)\n(2,002,USA,USA,0,1,0,1)\n(3,003,FRA,France,0,1,0,1)";
         String out = handler.listMedals();
         System.out.println("\nSorted medals by gold:\n" + out);
         assertEquals("Sorted medals by gold", ex, out);
@@ -69,7 +69,7 @@ public class MedalTableHandlerTest {
         competitionHandler.addCompetition("0003", 2001, "France", "ball", "soccer", 1, 0, 0);
         competitionHandler.addCompetition("0003", 2003, "France", "ball", "soccer", 0, 1, 0);
 
-        String ex = "(1 001 GER Germany 2 1 0 3)\n(2 003 FRA France 1 2 0 3)\n(3 002 USA USA 1 1 0 2)";
+        String ex = "(1,001,GER,Germany,2,1,0,3)\n(2,003,FRA,France,1,2,0,3)\n(3,002,USA,USA,1,1,0,2)";
         String out = handler.listMedals();
         System.out.println("\nSorted medals by silver:\n" + out);
         assertEquals("Sorted medals by silver", ex, out);
@@ -81,7 +81,7 @@ public class MedalTableHandlerTest {
         competitionHandler.addCompetition("0003", 2001, "France", "ball", "soccer", 1, 0, 0);
         competitionHandler.addCompetition("0002", 2002, "USA", "winter", "bob", 0, 0, 1);
 
-        String ex = "(1 001 GER Germany 2 1 0 3)\n(2 002 USA USA 1 1 1 3)\n(3 003 FRA France 1 1 0 2)";
+        String ex = "(1,001,GER,Germany,2,1,0,3)\n(2,002,USA,USA,1,1,1,3)\n(3,003,FRA,France,1,1,0,2)";
         String out = handler.listMedals();
         System.out.println("\nSorted medals by bronze:\n" + out);
         assertEquals("Sorted medals by bronze", ex, out);
@@ -94,7 +94,7 @@ public class MedalTableHandlerTest {
         competitionHandler.addCompetition("0002", 2002, "USA", "winter", "bob", 0, 0, 1);
         competitionHandler.addCompetition("0003", 2002, "France", "ball", "soccer", 0, 0, 1);
 
-        String ex = "(1 001 GER Germany 2 1 0 3)\n(2 002 USA USA 1 1 1 3)\n(3 003 FRA France 1 1 1 3)";
+        String ex = "(1,001,GER,Germany,2,1,0,3)\n(2,002,USA,USA,1,1,1,3)\n(3,003,FRA,France,1,1,1,3)";
         String out = handler.listMedals();
         System.out.println("\nSorted medals by IOC:\n" + out);
         assertEquals("Sorted medals by IOC", ex, out);

@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SportsVenueHandlerTest {
     private SportsVenueHandler handler;
@@ -41,6 +41,7 @@ public class SportsVenueHandlerTest {
         String ex2 = "Error, IOC does not exist.";
         assertEquals("Failed 1", ex1, handler.addSportsVenue("002", "country2", "loc2", "name2", 2010, 1000));
         assertEquals("Success", "OK", handler.addSportsVenue("006", "country2", "loc6", "name6", 2010, 1200));
+        assertEquals("Success", "OK", handler.addSportsVenue("007", "country2", "loc6", "name6", 2010, 1200));
         assertEquals("Failed 2", ex2, handler.addSportsVenue("077", "country99", "loc7", "name7", 2011, 1400));
     }
 
@@ -58,6 +59,6 @@ public class SportsVenueHandlerTest {
 
     @Test
     public void listSportVenuesEmpty() {
-        assertEquals("Empty", "Error, no sport venues registered yet.", handler.listSportVenues(""));
+        assertEquals("Empty", "", handler.listSportVenues(""));
     }
 }

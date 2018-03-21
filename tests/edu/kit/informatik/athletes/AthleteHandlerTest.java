@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AthleteHandlerTest {
     private AthleteHandler handler;
@@ -57,6 +57,9 @@ public class AthleteHandlerTest {
         String ex2 = "Error, this country isn't registered in the IOC list.";
         assertEquals("Failed 1", ex2, handler.addAthlete("0009", "name2", "name2", "Russia", "winter", "bob"));
         assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "France", "ball", "basketball"));
+        assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "France", "ball", "soccer"));
+        assertEquals("Success", "OK", handler.addAthlete("0006", "name5", "name5", "France", "ball", "basketball"));
+        assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "Germany", "winter", "basketball"));
         assertEquals("Failed 2", ex1, handler.addAthlete("0005", "name5", "name5", "Germany", "winter", "basketball"));
     }
 
@@ -78,6 +81,6 @@ public class AthleteHandlerTest {
         System.out.println("\nList Athletes:\n" + out);
         assertEquals("Sorted", ex, out);
 
-        assertEquals("No list", "Error, no athletes registered yet.", handler.summaryAthletes("test", "test"));
+        assertEquals("No list", "", handler.summaryAthletes("test", "test"));
     }
 }

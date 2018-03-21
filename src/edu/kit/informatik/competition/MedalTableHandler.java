@@ -62,9 +62,6 @@ public class MedalTableHandler {
         if (output.length() >= 1)
             output.setLength(output.length() - 1); //Remove last linebreak
 
-        if (output.length() == 0)
-            output.append("Error, no competitions to create a medal table registered yet.");
-
         return output.toString();
     }
 

@@ -22,12 +22,12 @@ public class AthleteHandler {
      */
     public String addAthlete(String id, String firstName, String lastName, String country,
                              String sport, String discipline) {
-        if (idNotUsed(id) && iocExists(country) && sportExists(sport, discipline)) {
+        if (iocExists(country) && sportExists(sport, discipline) && notInList(id, sport, discipline)) {
             athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
             return "OK";
-        } else if (!iocExists(country) && idNotUsed(id) && sportExists(sport, discipline)) {
+        } else if (!iocExists(country) && sportExists(sport, discipline) && notInList(id, sport, discipline)) {
             return "Error, this country isn't registered in the IOC list.";
-        }  else if (idNotUsed(id) && !sportExists(sport, discipline)) {
+        }  else if (!sportExists(sport, discipline)) {
             return "Error, this sport is not registered yet.";
         } else {
             return "Error, this athlete already exists.";
@@ -59,21 +59,18 @@ public class AthleteHandler {
         if (output.length() >= 1)
             output.setLength(output.length() - 1); //Remove last linebreak
 
-        if (output.length() == 0)
-            output.append("Error, no athletes registered yet.");
-
-
         return output.toString();
     }
 
     /**
-     * Get the index of the item where the requested id is located
+     * Check if there is already an athlete registered in the same discipline
      * @param id The id to search for
      * @return The id if found, else -1
      */
-    private boolean idNotUsed(String id) {
+    private boolean notInList(String id, String sport, String discipline) {
         for (Athlete athlete: athletes) {
-            if (athlete.getId().equals(id)) {
+            if (athlete.getId().equals(id) && athlete.getSport().equals(sport)
+                    && athlete.getDiscipline().equals(discipline)) {
                 return false;
             }
         }
@@ -81,9 +78,9 @@ public class AthleteHandler {
     }
 
     /**
-     * Get the IOC of a country
+     * Check if an ioc exists
      * @param country The country the IOC is searched for
-     * @return The to the country referring IOC
+     * @return True if it exists
      */
     private boolean iocExists(String country) {
         for (Ioc item: Core.getIocHandler().getIocList()) {
