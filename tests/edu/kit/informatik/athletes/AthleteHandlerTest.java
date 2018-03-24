@@ -55,12 +55,18 @@ public class AthleteHandlerTest {
     public void addAthlete() {
         String ex1 = "Error, this athlete already exists.";
         String ex2 = "Error, this country isn't registered in the IOC list.";
+        String ex3 = "Error, the athlete already exists with a different name or country.";
+        String ex4 = "Error, this sport is not registered yet.";
         assertEquals("Failed 1", ex2, handler.addAthlete("0009", "name2", "name2", "Russia", "winter", "bob"));
         assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "France", "ball", "basketball"));
         assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "France", "ball", "soccer"));
         assertEquals("Success", "OK", handler.addAthlete("0006", "name5", "name5", "France", "ball", "basketball"));
-        assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "Germany", "winter", "basketball"));
-        assertEquals("Failed 2", ex1, handler.addAthlete("0005", "name5", "name5", "Germany", "winter", "basketball"));
+        assertEquals("Failed 0", ex4, handler.addAthlete("0006", "name5", "name5", "France", "awd", "awd"));
+        assertEquals("Failed 1", ex3, handler.addAthlete("0005", "name5", "name5", "Germany", "winter", "basketball"));
+        assertEquals("Failed 2", ex3, handler.addAthlete("0005", "name5", "name6", "France", "winter", "basketball"));
+        assertEquals("Failed 3", ex3, handler.addAthlete("0005", "name6", "name5", "France", "winter", "basketball"));
+        assertEquals("Success", "OK", handler.addAthlete("0005", "name5", "name5", "France", "winter", "basketball"));
+        assertEquals("Failed 4", ex1, handler.addAthlete("0005", "name5", "name5", "France", "winter", "basketball"));
     }
 
     @Test

@@ -35,6 +35,7 @@ public class MedalTableHandlerTest {
 
         athleteHandler = Core.getAthleteHandler();
         athleteHandler.addAthlete("0001", "name1", "name1", "Germany", "winter", "ski");
+        athleteHandler.addAthlete("0001", "name1", "name1", "Germany", "winter", "bob");
         athleteHandler.addAthlete("0003", "name3", "name3", "France", "ball", "soccer");
         athleteHandler.addAthlete("0002", "name2", "name2", "USA", "winter", "bob");
 
@@ -66,10 +67,11 @@ public class MedalTableHandlerTest {
     @Test
     public void listMedalsSortBySilver() {
         competitionHandler.addCompetition("0002", 2000, "USA", "winter", "bob", 1, 0, 0);
+        competitionHandler.addCompetition("0001", 1996, "Germany", "winter", "bob", 1, 0, 0);
         competitionHandler.addCompetition("0003", 2001, "France", "ball", "soccer", 1, 0, 0);
         competitionHandler.addCompetition("0003", 2003, "France", "ball", "soccer", 0, 1, 0);
 
-        String ex = "(1,001,GER,Germany,2,1,0,3)\n(2,003,FRA,France,1,2,0,3)\n(3,002,USA,USA,1,1,0,2)";
+        String ex = "(1,001,GER,Germany,3,1,0,4)\n(2,003,FRA,France,1,2,0,3)\n(3,002,USA,USA,1,1,0,2)";
         String out = handler.listMedals();
         System.out.println("\nSorted medals by silver:\n" + out);
         assertEquals("Sorted medals by silver", ex, out);

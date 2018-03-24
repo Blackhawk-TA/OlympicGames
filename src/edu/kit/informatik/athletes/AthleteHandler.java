@@ -23,8 +23,12 @@ public class AthleteHandler {
     public String addAthlete(String id, String firstName, String lastName, String country,
                              String sport, String discipline) {
         if (iocExists(country) && sportExists(sport, discipline) && notInList(id, sport, discipline)) {
-            athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
-            return "OK";
+            if (entryEqual(id, firstName, lastName, country)) {
+                athletes.add(new Athlete(id, firstName, lastName, country, sport, discipline));
+                return "OK";
+            } else {
+                return "Error, the athlete already exists with a different name or country.";
+            }
         } else if (!iocExists(country) && sportExists(sport, discipline) && notInList(id, sport, discipline)) {
             return "Error, this country isn't registered in the IOC list.";
         }  else if (!sportExists(sport, discipline)) {
@@ -60,6 +64,17 @@ public class AthleteHandler {
             output.setLength(output.length() - 1); //Remove last linebreak
 
         return output.toString();
+    }
+
+    //Check if athlete to add has the same name and country as other entries of the athlete with the same id
+    private boolean entryEqual(String id, String firstName, String lastName, String country) {
+        for (Athlete athlete : athletes) {
+            if (athlete.getId().equals(id) && (!athlete.getFirstName().equals(firstName)
+                    || !athlete.getLastName().equals(lastName) || !athlete.getCountry().equals(country))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
